@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: $fs-0;
+  color: $color-black-0;
+  background-color: $color-white-0;
+  line-height: $line-height-0;
+  // height: 2000px;
+}
+html {
+  scroll-behavior: smooth;
+}
+.show-hover {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+}
+.hidden-hover {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+// custom scroll bar
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.nav-tabs {
+  border-bottom: none;
+  .nav-link {
+    border: none;
+    background-color: transparent;
+    opacity: 0.5;
+    transition: all 0.2s;
+    color: $color-black-0;
+    &:hover {
+      border: none;
+      opacity: 1;
+    }
+  }
+  .nav-link.active {
+    border: none;
+    opacity: 1;
+  }
+  
+}
+
+.overflow-400{
+  max-height: 400px;
+  overflow: auto;
+}

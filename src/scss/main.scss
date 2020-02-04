@@ -1,0 +1,14 @@
+@import "./Helper/variables";
+@import "./Helper/mixin";
+
+@import "./Base/reset";
+@import "./Base/normalized";
+
+@import "./Layout/header";
+@import "./Layout/carousel";
+@import "./Layout/modal";
+@import "./Layout/homeTools";
+@import "./Layout/listMovie";
+@import "./Layout/cinema";
+@import "./Layout/new";
+@import "./Layout/footer";

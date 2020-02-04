@@ -1,0 +1,30 @@
+.my-carousel{
+    padding-top: 90px;
+    .carousel{
+        .carousel-inner{
+            .carousel-item{
+                position: relative;
+                &:hover{
+                    .carousel-item--trailer{
+                        opacity: 1;
+                    }
+
+                }
+                .carousel-item--trailer{
+                    button{
+                        background: 0 0;
+                        border: none;
+                    }
+                    position: absolute;
+                    top: 45%;
+                    left: 47%;
+                    opacity: 0;
+                    transition: all 0.5s;
+                    &:hover{
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+    }
+}

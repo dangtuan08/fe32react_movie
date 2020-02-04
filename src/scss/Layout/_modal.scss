@@ -1,0 +1,13 @@
+.trailer-modal{
+    .modal-content{
+        background-color: transparent;
+        // width: auto;
+        border: none;
+        button{
+            position: absolute;
+            right: 10px;
+            top: 4px;
+            z-index: 2;
+        }
+    }
+}

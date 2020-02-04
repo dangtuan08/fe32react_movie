@@ -1,0 +1,24 @@
+.homeTools{
+  .homeTools--row{
+    padding: $pd-1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    .homeTools-item{
+      border-right: 1px solid #ced4da;
+      select{
+        border: none;
+        &:focus{
+          box-shadow: none;
+        }
+      }
+    }
+    .homeTools--btnBuy{
+      text-align: center;
+      button{
+        width: 100%;
+      }
+      
+    }
+    
+  }
+}

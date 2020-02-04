@@ -1,0 +1,88 @@
+.cinema {
+  padding-top: 30px;
+  #cinemaTab {
+    justify-content: center;
+    // .nav-link {
+    //   border: none;
+    //   background-color: transparent;
+    //   opacity: 0.5;
+    //   transition: all 0.2s;
+    // }
+    // .nav-link.active {
+    //   opacity: 1;
+    // }
+  }
+  #myCinemaTabContent {
+    
+    max-height: 400px;
+
+
+    .nav-item {
+      overflow: hidden;
+      .nav-link{
+        padding: 0;
+      }
+    }
+    .cgv-item {
+      cursor: pointer;
+    }
+    .cinema-logo {
+      width: 60px;
+    }
+    .cinema-info {
+      padding-left: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      p {
+        font-size: $fs-1 + 1;
+        margin-bottom: 0;
+      }
+      span.cinema-address {
+        font-size: $fs-1 - 1;
+        color: #949494;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+  .wrapMovie {
+    max-height: 400px;
+    overflow: auto;
+    .movie-info {
+      cursor: pointer;
+      p {
+        font-size: 14px;
+        margin-bottom: 0;
+        .movieTitle {
+          font-weight: $fw-bold-0;
+        }
+      }
+
+      .ageType {
+        background-color: #fb4226;
+        color: #fff;
+        border-radius: 4px;
+        padding: 0 5px;
+        margin-right: 5px;
+        font-size: 12px;
+        text-align: center;
+      }
+      .movie-total-time {
+        font-size: $fs-1 - 1;
+        color: #949494;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    .listTime {
+      .s-version {
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 5px;
+        font-weight: $fw-bold-0;
+      }
+    }
+  }
+}
