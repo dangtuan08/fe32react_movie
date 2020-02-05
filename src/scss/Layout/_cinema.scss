@@ -1,22 +1,37 @@
 .cinema {
+  #homeCinemaComplex{
+    height: 130px;
+    // background: url("../../../public/img/back-news.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
   padding-top: 30px;
   #cinemaTab {
     justify-content: center;
-    // .nav-link {
-    //   border: none;
-    //   background-color: transparent;
-    //   opacity: 0.5;
-    //   transition: all 0.2s;
-    // }
+    .nav-item{
+      width: 10%;
+      padding-right: 10px;
+    }
+    .nav-link {
+      padding: 0.3em;
+      
+      img{
+        width: 100%;
+        
+      }
+    }
     // .nav-link.active {
     //   opacity: 1;
     // }
   }
   #myCinemaTabContent {
     
-    max-height: 400px;
+    height: 400px;
 
 
+    .listTheaters{
+      border-right: 1px solid rgba(0,0,0,.125)
+    }
     .nav-item {
       overflow: hidden;
       .nav-link{
