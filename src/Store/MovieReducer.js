@@ -2,7 +2,9 @@ import * as ActionType from "../Store/Type/ActionTypeMovie";
 
 const initialState = {
   listMovie: [],
-  movie: {}
+  movie: {},
+  MovieID: "",
+  maCumRap: ""
 };
 
 const MovieReducer = (state = initialState, action) => {

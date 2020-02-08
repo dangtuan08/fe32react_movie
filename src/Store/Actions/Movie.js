@@ -1,13 +1,11 @@
 import * as ActionType from "../Type/ActionTypeMovie";
 import Axios from "axios";
+import { movieService } from "./../../Services/index";
 
 export const actGetListMovieAPI = () => {
   return dispatch => {
-    Axios({
-      method: "GET",
-      url:
-        "http://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01"
-    })
+    movieService
+      .getListMovieAxios()
       .then(result => {
         dispatch({
           type: ActionType.GET_LIST_MOVIE,
