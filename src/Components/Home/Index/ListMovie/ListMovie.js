@@ -4,18 +4,48 @@ import { connect } from "react-redux";
 import * as action from "../../../../Store/Actions/Movie";
 
 class ListMovie extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      soPhanTu: 4,
+    };
+  }
+
   componentDidMount() {
-    this.props.getListMovie();
+    this.props.getListMoviePage(this.state.soPhanTu);
+    console.log(this.state);
+    
   }
 
   renderHTML = () => {
-    let { listMovie } = this.props;
-    return listMovie.map((item, index) => {
-      return <Movie key={index} movie={item} />;
-    });
+    let { listMoviePage } = this.props;
+    if (listMoviePage.items) {
+      return listMoviePage.items.map((item, index) => {
+        return <Movie key={index} movie={item} />;
+      });
+    }
+    // console.log(listMoviePage);
+  };
+
+  handleOnClick = () => {
+    if (this.state.soPhanTu <= this.props.listMoviePage.totalCount) {
+      this.setState(
+        {
+          soPhanTu: this.state.soPhanTu + 4
+        },
+        () => {
+          // console.log(this.state);
+          this.props.getListMoviePage(this.state.soPhanTu);
+        }
+      );
+    }
   };
 
   render() {
+    console.log("render");
+    console.log(this.props.listMoviePage.items);
+    
     return (
       <>
         <section className="movies">
@@ -56,8 +86,11 @@ class ListMovie extends Component {
                 role="tabpanel"
                 aria-labelledby="movie-tab"
               >
-                <div className="tab-movie-content owl-carousel owl-theme">
-                  {this.renderHTML()}
+                <div className="row">{this.renderHTML()}</div>
+                <div className="col-sm-12 text-center">
+                  {this.state.soPhanTu <= this.props.listMoviePage.totalCount ? <button className="btn btn-info" onClick={this.handleOnClick}>
+                    Xem thêm
+                  </button> : "" }
                 </div>
               </div>
               {/* tab sắp chiếu */}
@@ -77,15 +110,20 @@ class ListMovie extends Component {
   }
 }
 const mapStateToProps = state => {
+  console.log("mapStateToProps");
+  
   return {
-    listMovie: state.MovieReducer.listMovie
+    // listMovie: state.MovieReducer.listMovie
+    listMoviePage: state.MovieReducer.listMoviePage
   };
 };
 
 const mapDispatchToProps = dispath => {
+  console.log("mapDispatchToProps");
+  
   return {
-    getListMovie: () => {
-      dispath(action.actGetListMovieAPI());
+    getListMoviePage: soPhanTu => {
+      dispath(action.actGetListMoviePageAPI(soPhanTu));
     }
   };
 };

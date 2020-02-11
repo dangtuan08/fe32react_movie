@@ -18,6 +18,22 @@ export const actGetListMovieAPI = () => {
   };
 };
 
+export const actGetListMoviePageAPI = (soPhanTu) => {
+  return dispatch => {
+    movieService
+      .getListMoviePageAxios(soPhanTu)
+      .then(result => {
+        dispatch({
+          type: ActionType.GET_LIST_MOVIE_PAGE,
+          listMoviePage: result.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
 export const actGetDetailMovieAPI = id => {
   return dispatch => {
     Axios({
