@@ -28,45 +28,31 @@ class HomeTool extends Component {
 
   //Render các cụm rạp
   renderTheater = () => {
-    let { listTheater } = this.props;
-    // console.log(listTheater.length);
-    if (listTheater.length > 1 && this.state.movieValid) {
-      return listTheater.map((item, index) => {
-        return item.map((theater, index) => {
+    let { listMovieTheater } = this.props;
+    if (this.state.movieValid && listMovieTheater.heThongRapChieu) {
+      console.log(listMovieTheater.heThongRapChieu);
+      return listMovieTheater.heThongRapChieu.map((heThongRapChieu, index) => {
+        // console.log(heThongRapChieu);
+
+        return heThongRapChieu.cumRapChieu.map((cumRapChieu, index) => {
+          // console.log(cumRapChieu.tenCumRap);
           return (
-            <option key={index} value={theater.maCumRap}>
-              {theater.tenCumRap}
+            <option key={index} value={cumRapChieu.maCumRap}>
+              {cumRapChieu.tenCumRap}
             </option>
           );
         });
       });
-    } else {
-      return (
-        <option value={-1} disabled>
-          Vui lòng chọn phim
-        </option>
-      );
-    }
-  };
-
-  renderMovieTheater = () => {
-    if (
-      this.state.movieValid &&
-      this.state.theaterValid &&
-      this.props.listMovieTheater !== ""
-    ) {
-      console.log("rendermovi");
     }
   };
 
   handleOnchange = event => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
 
     if (event.target.name === "sel-movie" && this.state.movieValid === false) {
-      console.log(event.target.value);
-      this.props.listCinema.map((item, index) => {
-        return this.props.getListTheater(item.maHeThongRap);
-      });
+      // console.log(event.target.value);
+
+      this.props.getMovieTheater(event.target.value);
       this.setState(
         {
           movieID: event.target.value,
@@ -78,6 +64,7 @@ class HomeTool extends Component {
       );
     }
     if (event.target.name === "sel-movie" && this.state.movieValid === true) {
+      this.props.getMovieTheater(event.target.value);
       this.setState(
         {
           movieID: event.target.value
@@ -87,16 +74,22 @@ class HomeTool extends Component {
         }
       );
     }
-    if (
-      event.target.name === "sel-theater"
-    ) {
-      this.setState({
-        theaterID: event.target.value,
-        theaterValid: true
-      });
-      this.props.getMovieTheater(this.state.movieID);
+    if (event.target.name === "sel-theater") {
+      this.setState(
+        {
+          theaterID: event.target.value,
+          theaterValid: true
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
     }
   };
+
+  // componentDidMount(){
+  //   this.props.getMovieTheater(1314)
+  // }
 
   render() {
     return (
@@ -124,23 +117,29 @@ class HomeTool extends Component {
                   name="sel-theater"
                   onChange={this.handleOnchange}
                 >
-                  <option selected disabled>
+                  <option selected hidden>
                     Rạp
                   </option>
                   {this.renderTheater()}
                 </select>
               </div>
               <div className="col-lg-2 col-md-2 homeTools-item">
-                <select className="form-control" id="sel1" name="sellist1">
+                <select
+                  className="form-control"
+                  id="sel1"
+                  name="sellist1"
+                  onChange={this.handleOnchange}
+                >
                   <option selected disabled>
                     Ngày xem{" "}
                   </option>
-                  {this.renderMovieTheater()}
                 </select>
               </div>
               <div className="col-lg-2 col-md-2 homeTools-item">
                 <select className="form-control" id="sel1" name="sellist1">
-                  <option selected>Xuất chiếu</option>
+                  <option value="" selected disabled>
+                    Xuất chiếu
+                  </option>
                   <option value={2}>2</option>
                   <option value={3}>3</option>
                   <option value={4}>4</option>
@@ -162,8 +161,6 @@ class HomeTool extends Component {
 const mapStateToProps = state => {
   return {
     listMovie: state.MovieReducer.listMovie,
-    listCinema: state.CinemaReducer.listCinema,
-    listTheater: state.CinemaReducer.listTheater,
     listMovieTheater: state.CinemaReducer.movieTheater
   };
 };

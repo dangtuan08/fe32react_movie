@@ -19,7 +19,7 @@ class Index extends Component {
         {/* <Header /> */}
         {/* <Carousel /> */}
         <HomeTool />
-        <ListMovie/>
+        {/* <ListMovie/> */}
       </>
     );
   }

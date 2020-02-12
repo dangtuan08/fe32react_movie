@@ -3,7 +3,7 @@ import * as ActionType from "../Store/Type/ActionTypeMovie";
 const initialState = {
   listCinema: [],
   listTheater: [],
-  movieTheater: []
+  movieTheater: {}
 };
 
 const CinemaReducer = (state = initialState, action) => {
@@ -15,7 +15,7 @@ const CinemaReducer = (state = initialState, action) => {
       state.listTheater = [...state.listTheater, action.listTheater];
       return { ...state };
     case ActionType.GET_INFO_MOVIE_THEATER:
-      state.movieTheater = [...state.movieTheater, action.movieTheater];
+      state.movieTheater = action.movieTheater;
       return { ...state };
     default:
       return state;
