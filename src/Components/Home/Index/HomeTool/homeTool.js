@@ -10,9 +10,16 @@ class HomeTool extends Component {
     this.state = {
       movieID: "",
       movieValid: false,
+      movieName: "",
       theaterID: "",
-      theaterName:"",
-      theaterValid: false
+      theaterName: "",
+      theaterValid: false,
+      day: "",
+      dayValid: false,
+      xuatChieu: {
+        maLichChieu: "",
+        gioChieu: ""
+      }
     };
   }
 
@@ -20,95 +27,271 @@ class HomeTool extends Component {
     // console.log(this.props.listMovie);
     return this.props.listMovie.map((movie, index) => {
       return (
-        <option key={index} value={movie.maPhim}>
+        // <option key={index} value={movie.maPhim}>
+        //   {movie.tenPhim}
+        // </option>
+        <button
+          key={index}
+          value={movie.maPhim}
+          className="dropdown-item"
+          name="phim"
+          onClick={this.handleOnClick}
+        >
           {movie.tenPhim}
-        </option>
+        </button>
       );
     });
   };
-
-  handleClickRap=(event)=>{
-    console.log(event.target.innerHTML);
-    console.log(1);
-    this.setState({
-      theaterName:event.target.innerHTML
-    })
-    
-  }
 
   //Render các cụm rạp
   renderTheater = () => {
     let { listMovieTheater } = this.props;
     if (this.state.movieValid && listMovieTheater.heThongRapChieu) {
-      console.log(listMovieTheater.heThongRapChieu);
+      // console.log(listMovieTheater.heThongRapChieu);
       return listMovieTheater.heThongRapChieu.map((heThongRapChieu, index) => {
-        // console.log(heThongRapChieu);
-
         return heThongRapChieu.cumRapChieu.map((cumRapChieu, index) => {
-          // console.log(cumRapChieu.tenCumRap);
           return (
-            // <option key={index} value={cumRapChieu.maCumRap}>
-            //   {cumRapChieu.tenCumRap}
-            // </option>
-
-            //cach render dropdow
-
             <button
               key={index}
               value={cumRapChieu.maCumRap}
               className="dropdown-item"
-              onClick={this.handleClickRap}
+              onClick={this.handleOnClick}
+              name="rap"
             >
               {cumRapChieu.tenCumRap}
             </button>
           );
         });
       });
-    }else{
-      return <button
-              
-              value=""
+    } else {
+      return (
+        <button value="" className="dropdown-item" disabled>
+          Vui lòng chọn phim
+        </button>
+      );
+    }
+  };
+
+  //render danh sách ngày chiếu
+  renderDay = () => {
+    let { listMovieTheater } = this.props;
+    let mangNgayChieu = [];
+    if (
+      this.state.movieValid &&
+      this.state.theaterValid &&
+      listMovieTheater.heThongRapChieu
+    ) {
+      // console.log("render day");
+      listMovieTheater.heThongRapChieu.map((heThongRapChieu, index) => {
+        heThongRapChieu.cumRapChieu.map((cumRapChieu, index) => {
+          cumRapChieu.lichChieuPhim.map((lichChieuPhim, index) => {
+            //  (
+            //
+            // );
+            let day = new Date(
+              lichChieuPhim.ngayChieuGioChieu
+            ).toLocaleDateString();
+            const found = mangNgayChieu.find(ngay => ngay === day);
+            if (found) {
+            } else {
+              mangNgayChieu.push(day);
+            }
+          });
+        });
+      });
+      // console.log(mangNgayChieu);
+      return mangNgayChieu.map((ngay, index) => {
+        return (
+          <button
+            key={index}
+            value={ngay}
+            className="dropdown-item"
+            onClick={this.handleOnClick}
+            name="ngayChieu"
+          >
+            {ngay}
+          </button>
+        );
+      });
+    } else {
+      return (
+        <button value="" className="dropdown-item" disabled>
+          Vui lòng chọn phim và rạp
+        </button>
+      );
+    }
+  };
+
+  renderTime = () => {
+    let { listMovieTheater } = this.props;
+    let mangGioChieu = [];
+    if (
+      this.state.movieValid &&
+      this.state.theaterValid &&
+      listMovieTheater.heThongRapChieu
+    ) {
+      // console.log("render day");
+      listMovieTheater.heThongRapChieu.map((heThongRapChieu, index) => {
+        heThongRapChieu.cumRapChieu.map((cumRapChieu, index) => {
+          if (cumRapChieu.maCumRap === this.state.theaterID) {
+            cumRapChieu.lichChieuPhim.map((lichChieuPhim, index) => {
+              let day = new Date(
+                lichChieuPhim.ngayChieuGioChieu
+              ).toLocaleDateString();
+              let time = new Date(
+                lichChieuPhim.ngayChieuGioChieu
+              ).toLocaleTimeString();
+              // const found = mangGioChieu.find(ngay => ngay === day);
+              if (this.state.day === day) {
+                mangGioChieu.push({
+                  maLichChieu: lichChieuPhim.maLichChieu,
+                  gioChieu: time
+                });
+              } else {
+              }
+            });
+          }
+        });
+      });
+      // console.log(mangNgayChieu);
+      if (mangGioChieu.length >0) {
+        return mangGioChieu.map((item, index) => {
+          return (
+            <button
+              key={index}
+              value={item.maLichChieu}
               className="dropdown-item"
+              onClick={this.handleOnClick}
+              name="gioChieu"
             >
-              Vui lòng chọn phim
+              {item.gioChieu}
             </button>
+          );
+        });
+      } else {
+        return (
+          <button value="" className="dropdown-item" name="gioChieu" disabled>
+            Không có xuất chiếu
+          </button>
+        );
+      }
+    } else {
+      return (
+        <button value="" className="dropdown-item" disabled>
+          Vui lòng chọn phim, rạp và ngày xem
+        </button>
+      );
     }
   };
-
-  handleOnchange = event => {
-    // console.log(event.target.value);
-
-    if (event.target.name === "sel-movie" && this.state.movieValid === false) {
-      // console.log(event.target.value);
-
+  handleOnClick = event => {
+    // sự kiện cho lần đầu chọn phim
+    if (event.target.name === "phim" && this.state.movieValid === false) {
       this.props.getMovieTheater(event.target.value);
       this.setState(
         {
           movieID: event.target.value,
-          movieValid: true
+          movieValid: true,
+          movieName: event.target.innerHTML
         },
         () => {
           console.log(this.state);
         }
       );
     }
-    if (event.target.name === "sel-movie" && this.state.movieValid === true) {
+    // sự kiện cho lần n chọn phim
+    if (event.target.name === "phim" && this.state.movieValid === true) {
       this.props.getMovieTheater(event.target.value);
       this.setState(
         {
           movieID: event.target.value,
-          theaterName:""
+          theaterName: "",
+          movieName: event.target.innerHTML,
+          theaterID: "",
+          theaterName: "",
+          theaterValid: false,
+          day: "",
+          dayValid: false,
+          xuatChieu: {
+            maLichChieu: "",
+            gioChieu: ""
+          }
         },
         () => {
           console.log(this.state);
         }
       );
     }
-    if (event.target.name === "sel-theater") {
+
+    //sự kiện cho chọn rạp
+    if (event.target.name === "rap" && this.state.theaterValid === false) {
       this.setState(
         {
+          theaterName: event.target.innerHTML,
+          theaterValid: true,
+          theaterID: event.target.value
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
+    }
+    // sự kiện chọn lại rạp
+    if (event.target.name === "rap" && this.state.theaterValid === true) {
+      this.setState(
+        {
+          theaterName: event.target.innerHTML,
+          theaterValid: true,
           theaterID: event.target.value,
-          theaterValid: true
+          day: "",
+          dayValid: false,
+          xuatChieu: {
+            maLichChieu: "",
+            gioChieu: ""
+          }
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
+    }
+
+    if (event.target.name === "ngayChieu" && this.state.dayValid === false) {
+      // console.log(event.target.value);
+      this.setState(
+        {
+          day: event.target.value,
+          dayValid: true
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
+    }
+
+    if (event.target.name === "ngayChieu" && this.state.dayValid === true) {
+      // console.log(event.target.value);
+      this.setState(
+        {
+          day: event.target.value,
+          xuatChieu: {
+            maLichChieu: "",
+            gioChieu: ""
+          }
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
+    }
+
+    if (event.target.name === "gioChieu") {
+      // console.log(event.target.value);
+      this.setState(
+        {
+          xuatChieu: {
+            maLichChieu: event.target.value,
+            gioChieu: event.target.innerHTML
+          }
         },
         () => {
           console.log(this.state);
@@ -116,10 +299,6 @@ class HomeTool extends Component {
       );
     }
   };
-
-  // componentDidMount(){
-  //   this.props.getMovieTheater(1314)
-  // }
 
   render() {
     return (
@@ -128,18 +307,25 @@ class HomeTool extends Component {
           <div className="container">
             <div className="row homeTools--row ">
               <div className="col-lg-3 col-md-3 homeTools-item">
-                <select
-                  className="form-control"
-                  id="sel-movie"
-                  name="sel-movie"
-                  onChange={this.handleOnchange}
-                >
-                  <option disabled selected>
-                    Phim
-                  </option>
-                  {this.renderMovie()}
-                </select>
+                <div className="dropdown">
+                  <button
+                    className="btn dropdown-toggle"
+                    type="button"
+                    id="ddphim"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {this.state.movieName === ""
+                      ? `Phim`
+                      : this.state.movieName}
+                  </button>
+                  <div className="dropdown-menu" aria-labelledby="ddphim">
+                    {this.renderMovie()}
+                  </div>
+                </div>
               </div>
+              {/* danh sách rạp */}
               <div className="col-lg-3 col-md-3 homeTools-item">
                 <div className="dropdown">
                   <button
@@ -150,7 +336,9 @@ class HomeTool extends Component {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    {this.state.theaterName===""? `Rạp` : this.state.theaterName}
+                    {this.state.theaterName === ""
+                      ? `Rạp`
+                      : this.state.theaterName}
                   </button>
                   <div className="dropdown-menu" aria-labelledby="triggerId">
                     {this.renderTheater()}
@@ -170,7 +358,7 @@ class HomeTool extends Component {
                 </select> */}
               </div>
               <div className="col-lg-2 col-md-2 homeTools-item">
-              <div className="dropdown">
+                <div className="dropdown">
                   <button
                     className="btn dropdown-toggle"
                     type="button"
@@ -179,39 +367,39 @@ class HomeTool extends Component {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    {this.state.theaterName===""? `Ngày xem` : this.state.theaterName}
+                    {this.state.day === "" ? `Ngày xem` : this.state.day}
                   </button>
                   <div className="dropdown-menu" aria-labelledby="ngayXem">
-                    {/* {this.renderTheater()} */}
+                    {this.renderDay()}
                   </div>
                 </div>
-                
-                {/* <select
-                  className="form-control"
-                  id="sel1"
-                  name="sellist1"
-                  onChange={this.handleOnchange}
-                >
-                  <option selected disabled>
-                    Ngày xem{" "}
-                  </option>
-                </select> */}
-
               </div>
               <div className="col-lg-2 col-md-2 homeTools-item">
-                <select className="form-control" id="sel1" name="sellist1">
-                  <option value="" selected disabled>
-                    Xuất chiếu
-                  </option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                </select>
+                <div className="dropdown">
+                  <button
+                    className="btn dropdown-toggle"
+                    type="button"
+                    id="gioXem"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {this.state.xuatChieu.gioChieu === ""
+                      ? `Xuất chiếu`
+                      : this.state.xuatChieu.gioChieu}
+                  </button>
+                  <div className="dropdown-menu" aria-labelledby="gioXem">
+                    {this.renderTime()}
+                  </div>
+                </div>
               </div>
               <div className="col-lg-2 col-md-2 homeTools--btnBuy">
-                <button className="btn btn-success text-center btn-buy-ticket">
+                {this.state.movieValid&&this.state.theaterValid&&this.state.dayValid&&this.state.xuatChieu.maLichChieu!==""?<button className="btn btn-success text-center btn-buy-ticket">
                   Mua vé
-                </button>
+                </button>:<button className="btn btn-success text-center btn-buy-ticket" disabled>
+                  Mua vé
+                </button>}
+                
               </div>
             </div>
           </div>

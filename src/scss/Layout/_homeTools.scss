@@ -1,25 +1,29 @@
-.homeTools{
-  .homeTools--row{
+.homeTools {
+  .homeTools--row {
     padding: $pd-1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-    .homeTools-item{
+    .homeTools-item {
       border-right: 1px solid #ced4da;
-      select{
+      select {
         border: none;
-        &:focus{
+        &:focus {
           box-shadow: none;
         }
       }
-      .dropdown{
-        button{
+      .dropdown {
+
+        button {
           color: #495057;
           width: 100%;
           padding-right: 20px;
           text-align: left;
           position: relative;
           box-shadow: none;
-          &::after{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          &::after {
             position: absolute;
             right: 5px;
             top: 50%;
@@ -29,23 +33,25 @@
             vertical-align: 0;
           }
         }
-        .dropdown-item{
+        .dropdown-item {
           cursor: pointer;
-          &:hover{
+          &:hover {
             background-color: #60c5ef;
             color: #fff;
           }
         }
-        
+      }
+      .dropdown-menu{
+        max-height: 300px;
+        overflow-y: scroll ;
+        transform: translate3d(0px, 38px, 0px) !important;
       }
     }
-    .homeTools--btnBuy{
+    .homeTools--btnBuy {
       text-align: center;
-      button{
+      button {
         width: 100%;
       }
-      
     }
-    
   }
 }
