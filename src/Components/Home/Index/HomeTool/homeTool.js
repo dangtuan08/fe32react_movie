@@ -11,6 +11,7 @@ class HomeTool extends Component {
       movieID: "",
       movieValid: false,
       theaterID: "",
+      theaterName:"",
       theaterValid: false
     };
   }
@@ -26,6 +27,15 @@ class HomeTool extends Component {
     });
   };
 
+  handleClickRap=(event)=>{
+    console.log(event.target.innerHTML);
+    console.log(1);
+    this.setState({
+      theaterName:event.target.innerHTML
+    })
+    
+  }
+
   //Render các cụm rạp
   renderTheater = () => {
     let { listMovieTheater } = this.props;
@@ -37,12 +47,31 @@ class HomeTool extends Component {
         return heThongRapChieu.cumRapChieu.map((cumRapChieu, index) => {
           // console.log(cumRapChieu.tenCumRap);
           return (
-            <option key={index} value={cumRapChieu.maCumRap}>
+            // <option key={index} value={cumRapChieu.maCumRap}>
+            //   {cumRapChieu.tenCumRap}
+            // </option>
+
+            //cach render dropdow
+
+            <button
+              key={index}
+              value={cumRapChieu.maCumRap}
+              className="dropdown-item"
+              onClick={this.handleClickRap}
+            >
               {cumRapChieu.tenCumRap}
-            </option>
+            </button>
           );
         });
       });
+    }else{
+      return <button
+              
+              value=""
+              className="dropdown-item"
+            >
+              Vui lòng chọn phim
+            </button>
     }
   };
 
@@ -67,7 +96,8 @@ class HomeTool extends Component {
       this.props.getMovieTheater(event.target.value);
       this.setState(
         {
-          movieID: event.target.value
+          movieID: event.target.value,
+          theaterName:""
         },
         () => {
           console.log(this.state);
@@ -111,7 +141,23 @@ class HomeTool extends Component {
                 </select>
               </div>
               <div className="col-lg-3 col-md-3 homeTools-item">
-                <select
+                <div className="dropdown">
+                  <button
+                    className="btn dropdown-toggle"
+                    type="button"
+                    id="triggerId"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {this.state.theaterName===""? `Rạp` : this.state.theaterName}
+                  </button>
+                  <div className="dropdown-menu" aria-labelledby="triggerId">
+                    {this.renderTheater()}
+                  </div>
+                </div>
+
+                {/* <select
                   className="form-control"
                   id="sel-theater"
                   name="sel-theater"
@@ -121,10 +167,26 @@ class HomeTool extends Component {
                     Rạp
                   </option>
                   {this.renderTheater()}
-                </select>
+                </select> */}
               </div>
               <div className="col-lg-2 col-md-2 homeTools-item">
-                <select
+              <div className="dropdown">
+                  <button
+                    className="btn dropdown-toggle"
+                    type="button"
+                    id="ngayXem"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {this.state.theaterName===""? `Ngày xem` : this.state.theaterName}
+                  </button>
+                  <div className="dropdown-menu" aria-labelledby="ngayXem">
+                    {/* {this.renderTheater()} */}
+                  </div>
+                </div>
+                
+                {/* <select
                   className="form-control"
                   id="sel1"
                   name="sellist1"
@@ -133,7 +195,8 @@ class HomeTool extends Component {
                   <option selected disabled>
                     Ngày xem{" "}
                   </option>
-                </select>
+                </select> */}
+
               </div>
               <div className="col-lg-2 col-md-2 homeTools-item">
                 <select className="form-control" id="sel1" name="sellist1">

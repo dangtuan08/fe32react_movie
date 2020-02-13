@@ -11,6 +11,33 @@
           box-shadow: none;
         }
       }
+      .dropdown{
+        button{
+          color: #495057;
+          width: 100%;
+          padding-right: 20px;
+          text-align: left;
+          position: relative;
+          box-shadow: none;
+          &::after{
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-block;
+            margin-left: 0;
+            vertical-align: 0;
+          }
+        }
+        .dropdown-item{
+          cursor: pointer;
+          &:hover{
+            background-color: #60c5ef;
+            color: #fff;
+          }
+        }
+        
+      }
     }
     .homeTools--btnBuy{
       text-align: center;
