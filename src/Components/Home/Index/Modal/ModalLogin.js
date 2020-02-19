@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import { Form, Formik, Field } from "formik";
+import { connect } from "react-redux";
+import * as action from "../../../../Store/Actions/User";
 
-export default class ModalLogin extends Component {
+class ModalLogin extends Component {
   render() {
+    console.log("render modal login");
+    
     return (
       <div id="modalLogin" className="modal fade modalLogin">
         <div className="modal-dialog modal-dialog-centered modal-login">
@@ -18,33 +23,49 @@ export default class ModalLogin extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <i className="fa fa-user" />
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                    required="required"
-                  />
-                </div>
-                <div className="form-group">
-                  <i className="fa fa-lock" />
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                    required="required"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="submit"
-                    className="btn btn-primary btn-block btn-lg"
-                    defaultValue="Login"
-                  />
-                </div>
-              </form>
+              <Formik
+                initialValues={{
+                  taiKhoan: "",
+                  matKhau: ""
+                }}
+                onSubmit={value => {
+                  // console.log(value);
+                  this.props.login(value);
+                }}
+                render={({ handleChange }) => (
+                  <Form>
+                    <div className="form-group">
+                      <i className="fa fa-user" />
+                      <Field
+                        type="text"
+                        className="form-control"
+                        placeholder="Tài khoản"
+                        required="required"
+                        name="taiKhoan"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <i className="fa fa-lock" />
+                      <Field
+                        type="password"
+                        className="form-control"
+                        placeholder="Mật khẩu"
+                        required="required"
+                        name="matKhau"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <input
+                        type="submit"
+                        className="btn btn-primary btn-block btn-lg"
+                        defaultValue="Login"
+                      />
+                    </div>
+                  </Form>
+                )}
+              />
             </div>
             <div className="modal-footer">
               <a href="#">Quên mật khẩu?</a>
@@ -55,3 +76,20 @@ export default class ModalLogin extends Component {
     );
   }
 }
+
+// const mapStateToProps = state => {
+//   console.log("mapStateToProps");
+
+//   return {
+//     listMoviePage: state.MovieReducer.listMoviePage
+//   };
+// };
+
+const mapDispatchToProps = dispath => {
+  return {
+    login: user => {
+      dispath(action.actLoginAPI(user));
+    }
+  };
+};
+export default connect(null, mapDispatchToProps)(ModalLogin);

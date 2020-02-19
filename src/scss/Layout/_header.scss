@@ -1,13 +1,13 @@
 .header {
-    position: fixed;
-    z-index: 9999;
-    width: 100%;
-    .navbar-brand{
-        img{
-            width: 50px;
-        }
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  .navbar-brand {
+    img {
+      width: 50px;
     }
-    li{
-        cursor: pointer;
-    }
+  }
+  li {
+    cursor: pointer;
+  }
 }

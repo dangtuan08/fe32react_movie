@@ -8,5 +8,6 @@ export const GET_LIST_THEATER= "GET_LIST_THEATER";
 export const GET_INFO_MOVIE_THEATER = "GET_INFO_MOVIE_THEATER";
 
 
-export const LOGIN_BTN_CLICK = "LOGIN_BTN_CLICK"
-export const SIGNUP_BTN_CLICK = "SIGNUP_BTN_CLICK"
+export const LOGIN = "LOGIN"
+export const SIGNUP = "SIGNUP"
+export const SET_USER_LOGIN = "SET_USER_LOGIN"

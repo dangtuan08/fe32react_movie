@@ -14,7 +14,7 @@ class ListMovie extends Component {
 
   componentDidMount() {
     this.props.getListMoviePage(this.state.soPhanTu);
-    console.log(this.state);
+    // console.log(this.state);
     
   }
 
@@ -43,8 +43,8 @@ class ListMovie extends Component {
   };
 
   render() {
-    console.log("render");
-    console.log(this.props.listMoviePage.items);
+    // console.log("render");
+    // console.log(this.props.listMoviePage.items);
     
     return (
       <>
@@ -110,8 +110,6 @@ class ListMovie extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log("mapStateToProps");
-  
   return {
     // listMovie: state.MovieReducer.listMovie
     listMoviePage: state.MovieReducer.listMoviePage
@@ -119,8 +117,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispath => {
-  console.log("mapDispatchToProps");
-  
   return {
     getListMoviePage: soPhanTu => {
       dispath(action.actGetListMoviePageAPI(soPhanTu));

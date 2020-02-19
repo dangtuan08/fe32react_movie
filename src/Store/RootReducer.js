@@ -1,12 +1,13 @@
 import { combineReducers } from "redux";
 import MovieReducer from "./MovieReducer";
 import CinemaReducer from './CinemaReducer'
-import ModalReducer from "./ModalReducer";
+import UserReducer from "./UserReducer";
+
 const rootReducer = combineReducers({
   //Nơi chưa các reducer cho tưng nghiệp vụ(store)
   MovieReducer: MovieReducer,
   CinemaReducer:CinemaReducer,
-  ModalReducer:ModalReducer
+  UserReducer : UserReducer
 });
 
 export default rootReducer;
