@@ -9,8 +9,9 @@
   #cinemaTab {
     justify-content: center;
     .nav-item{
-      width: 10%;
-      padding-right: 10px;
+      width: 9%;
+      margin-bottom: 0;
+      // padding-right: 10px;
     }
     .nav-link {
       padding: 0.3em;
@@ -34,6 +35,7 @@
     }
     .nav-item {
       overflow: hidden;
+
       .nav-link{
         padding: 0;
       }

@@ -24,13 +24,13 @@ class Index extends Component {
   render() {
     return (
       <>
-        <Carousel />
-        <HomeTool />
+        {/* {/* <Carousel /> */}
+        <HomeTool /> */}
         <ListMovie/>
         <Cinemas/>
         {/* {this.props.btnLoginClick?<ModalLogin/>:""} */}
-        <ModalLogin/>
-        <ModalSignUp/>
+        {/* <ModalLogin/>
+        <ModalSignUp/> */}
       
       </>
     );

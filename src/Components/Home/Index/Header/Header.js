@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import * as action from "../../../../Store/Actions/User";
-
+// import logo from './img/web-logo.png'
 class Header extends Component {
   
   componentDidMount() {
@@ -31,6 +31,7 @@ class Header extends Component {
               <img
                 className="img-fluid"
                 src="./img/web-logo.png"
+                // src={logo}
                 alt="web-logo.png"
               />
             </NavLink>
@@ -51,9 +52,9 @@ class Header extends Component {
             >
               <ul className="navbar-nav ml-auto mr-auto">
                 <li className="nav-item active">
-                  <a className="nav-link" href="#homeTools">
+                  <NavLink className="nav-link" to="/">
                     Lịch chiếu
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">
@@ -137,9 +138,9 @@ class Header extends Component {
             >
               <ul className="navbar-nav ml-auto mr-auto">
                 <li className="nav-item active">
-                  <a className="nav-link" href="#homeTools">
+                  <NavLink className="nav-link" to="/#homeTools">
                     Lịch chiếu
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">

@@ -29,14 +29,14 @@ class Movie extends Component {
             <div className="item movie-item">
               <div className="card">
                 <div className="movie-img">
-                  <a href="#">
+                  <NavLink to={`/detail-movie/${this.props.movie.maPhim}`}>
                     <img
                       className="card-img-top"
                       src={this.props.movie.hinhAnh}
                       alt="chi-chi-em-em-sister-sister"
                     />
                     <div className="overlay show-hover" />
-                  </a>
+                  </NavLink>
                   <button
                     className="btn-trailer show-hover"
                     onClick={this.openModal}
