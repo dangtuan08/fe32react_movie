@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../../Store/Actions/Cinema";
 import Theater from "./listTheater";
-
+import ListMovieOfTheater from "./listMovieOfTheater";
 class Cinemas extends Component {
   renderCinemaLogo() {
-    console.log(this.props.cinemas);
-
+    // console.log(this.props.cinemas);
     if (this.props.cinemas) {
       return this.props.cinemas.map((item, index) => {
         if (index === 0) {
@@ -68,225 +67,18 @@ class Cinemas extends Component {
               <div className="row">
                 <div className="col-sm-5 overflow-400 listTheaters">
                   <ul className="nav nav-tabs" id="ListCine" role="tablist">
-                  <Theater maHeThongRap={item.maHeThongRap}/>
+                    <Theater maHeThongRap={item.maHeThongRap} />
                   </ul>
                 </div>
                 <div className="col-sm-7 overflow-400">
                   <div className="tab-content" id="myListCineContent">
-                    <div
-                      className="tab-pane fade show active"
-                      id="cgvNguyenXi"
-                      role="tabpanel"
-                      aria-labelledby="cgvNguyenXi--tab"
-                    >
-                      <div className="wrapMovie">
-                        <div
-                          className="movie-info  d-flex flex-row pt-3"
-                          data-toggle="collapse"
-                          data-target="#demo"
-                        >
-                          <img
-                            className="pr-2"
-                            src="./img/tro-choi-ky-ao.jpg"
-                            alt="tro-choi-ky-ao.jpg"
-                          />
-                          <div className="wrapInfo">
-                            <p>
-                              <span className="ageType">C13</span>
-                              <span className="movieTitle">
-                                Trò Chơi Kỳ Ảo: Thăng Cấp - Jumanji: The Next
-                                Level
-                              </span>
-                            </p>
-                            <p className="movie-total-time">
-                              123 phút - TIX 8.3 - IMDb 0
-                            </p>
-                          </div>
-                        </div>
-                        <div id="demo" className="listTime pt-2 collapse show">
-                          <p className="s-version">2D Digital</p>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                        </div>
-                        <div
-                          className="movie-info  d-flex flex-row pt-3"
-                          data-toggle="collapse"
-                          data-target="#demo1"
-                        >
-                          <img
-                            className="pr-2"
-                            src="./img/tro-choi-ky-ao.jpg"
-                            alt="tro-choi-ky-ao.jpg"
-                          />
-                          <div className="wrapInfo">
-                            <p>
-                              <span className="ageType">C13</span>
-                              <span className="movieTitle">
-                                Trò Chơi Kỳ Ảo: Thăng Cấp - Jumanji: The Next
-                                Level
-                              </span>
-                            </p>
-                            <p className="movie-total-time">
-                              123 phút - TIX 8.3 - IMDb 0
-                            </p>
-                          </div>
-                        </div>
-                        <div id="demo1" className="listTime pt-2 collapse show">
-                          <p className="s-version">2D Digital</p>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                        </div>
-                        {/* test */}
-                        <div
-                          className="movie-info  d-flex flex-row pt-3"
-                          data-toggle="collapse"
-                          data-target="#demo1"
-                        >
-                          <img
-                            className="pr-2"
-                            src="./img/tro-choi-ky-ao.jpg"
-                            alt="tro-choi-ky-ao.jpg"
-                          />
-                          <div className="wrapInfo">
-                            <p>
-                              <span className="ageType">C13</span>
-                              <span className="movieTitle">
-                                Trò Chơi Kỳ Ảo: Thăng Cấp - Jumanji: The Next
-                                Level
-                              </span>
-                            </p>
-                            <p className="movie-total-time">
-                              123 phút - TIX 8.3 - IMDb 0
-                            </p>
-                          </div>
-                        </div>
-                        <div id="demo1" className="listTime pt-2 collapse show">
-                          <p className="s-version">2D Digital</p>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    {this.renderMovieOfTheater(item.maHeThongRap)}
                   </div>
                 </div>
               </div>
             </div>
           );
-        } else{
+        } else {
           return (
             <div
               key={index}
@@ -298,230 +90,71 @@ class Cinemas extends Component {
               <div className="row">
                 <div className="col-sm-5 overflow-400 listTheaters">
                   <ul className="nav nav-tabs" id="ListCine" role="tablist">
-                    <Theater maHeThongRap={item.maHeThongRap}/>
+                    <Theater maHeThongRap={item.maHeThongRap} />
                   </ul>
                 </div>
+
                 <div className="col-sm-7 overflow-400">
                   <div className="tab-content" id="myListCineContent">
-                    <div
-                      className="tab-pane fade show active"
-                      id="cgvNguyenXi"
-                      role="tabpanel"
-                      aria-labelledby="cgvNguyenXi--tab"
-                    >
-                      <div className="wrapMovie">
-                        <div
-                          className="movie-info  d-flex flex-row pt-3"
-                          data-toggle="collapse"
-                          data-target="#demo"
-                        >
-                          <img
-                            className="pr-2"
-                            src="./img/tro-choi-ky-ao.jpg"
-                            alt="tro-choi-ky-ao.jpg"
-                          />
-                          <div className="wrapInfo">
-                            <p>
-                              <span className="ageType">C13</span>
-                              <span className="movieTitle">
-                                Trò Chơi Kỳ Ảo: Thăng Cấp - Jumanji: The Next
-                                Level
-                              </span>
-                            </p>
-                            <p className="movie-total-time">
-                              123 phút - TIX 8.3 - IMDb 0
-                            </p>
-                          </div>
-                        </div>
-                        <div id="demo" className="listTime pt-2 collapse show">
-                          <p className="s-version">2D Digital</p>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                        </div>
-                        <div
-                          className="movie-info  d-flex flex-row pt-3"
-                          data-toggle="collapse"
-                          data-target="#demo1"
-                        >
-                          <img
-                            className="pr-2"
-                            src="./img/tro-choi-ky-ao.jpg"
-                            alt="tro-choi-ky-ao.jpg"
-                          />
-                          <div className="wrapInfo">
-                            <p>
-                              <span className="ageType">C13</span>
-                              <span className="movieTitle">
-                                Trò Chơi Kỳ Ảo: Thăng Cấp - Jumanji: The Next
-                                Level
-                              </span>
-                            </p>
-                            <p className="movie-total-time">
-                              123 phút - TIX 8.3 - IMDb 0
-                            </p>
-                          </div>
-                        </div>
-                        <div id="demo1" className="listTime pt-2 collapse show">
-                          <p className="s-version">2D Digital</p>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                        </div>
-                        {/* test */}
-                        <div
-                          className="movie-info  d-flex flex-row pt-3"
-                          data-toggle="collapse"
-                          data-target="#demo1"
-                        >
-                          <img
-                            className="pr-2"
-                            src="./img/tro-choi-ky-ao.jpg"
-                            alt="tro-choi-ky-ao.jpg"
-                          />
-                          <div className="wrapInfo">
-                            <p>
-                              <span className="ageType">C13</span>
-                              <span className="movieTitle">
-                                Trò Chơi Kỳ Ảo: Thăng Cấp - Jumanji: The Next
-                                Level
-                              </span>
-                            </p>
-                            <p className="movie-total-time">
-                              123 phút - TIX 8.3 - IMDb 0
-                            </p>
-                          </div>
-                        </div>
-                        <div id="demo1" className="listTime pt-2 collapse show">
-                          <p className="s-version">2D Digital</p>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            14:45
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            18:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            20:30
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary mr-2"
-                          >
-                            24:45
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    {this.renderMovieOfTheater(item.maHeThongRap)}
                   </div>
                 </div>
               </div>
             </div>
           );
         }
-          
       });
     }
   }
 
+  renderMovieOfTheater(maHeThongRap) {
+   
+    
+    let { listTheater } = this.props;
+    console.log(listTheater);
+    // console.log(listTheater);
+    if (listTheater.length > 0) {
+      return listTheater.map((item, index) => {
+        // console.log(item.maHeThong);
+
+        if (item.maHeThong === maHeThongRap) {
+          return item.listTheater.map((theater, index) => {
+            if (index === 0) {
+              return (
+                <div
+                  key={index}
+                  className="tab-pane fade show active"
+                  id={theater.maCumRap}
+                  role="tabpanel"
+                  aria-labelledby={theater.maCumRap + "--tab"}
+                >
+                  <ListMovieOfTheater
+                    maHeThongRap={maHeThongRap}
+                    maCumRap={theater.maCumRap}
+                  />
+                </div>
+              );
+            } else {
+              return (
+                <div
+                  key={index}
+                  className="tab-pane fade"
+                  id={theater.maCumRap}
+                  role="tabpanel"
+                  aria-labelledby={theater.maCumRap + "--tab"}
+                >
+                  <ListMovieOfTheater
+                    maHeThongRap={maHeThongRap}
+                    maCumRap={theater.maCumRap}
+                  />
+                </div>
+              );
+            }
+          });
+        }
+      });
+    }
+  }
   render() {
     return (
       <section className="cinema">
@@ -548,7 +181,8 @@ class Cinemas extends Component {
 
 const mapStateToProps = state => {
   return {
-    cinemas: state.CinemaReducer.listCinema
+    cinemas: state.CinemaReducer.listCinema,
+    listTheater: state.CinemaReducer.listTheater
   };
 };
 
@@ -557,9 +191,7 @@ const mapDispatchToProps = dispath => {
     getListCinema: () => {
       dispath(action.actGetListCinemaAPI());
     },
-    getListTheater: maHeThongRap => {
-      dispath(action.actGetListTheaterAPI(maHeThongRap));
-    }
+   
   };
 };
 

@@ -18,14 +18,15 @@ export const actGetListCinemaAPI = () => {
   };
 };
 
-export const actGetListTheaterAPI = (maHeThong) => {
+export const actGetListTheaterAPI = maHeThong => {
   return dispatch => {
     cinemaService
       .getListTheaterAxios(maHeThong)
       .then(result => {
+        let data = { maHeThong: maHeThong, listTheater: result.data };
         dispatch({
           type: ActionType.GET_LIST_THEATER,
-          listTheater: result.data
+          listTheater: data
         });
       })
       .catch(err => {
@@ -34,7 +35,7 @@ export const actGetListTheaterAPI = (maHeThong) => {
   };
 };
 
-export const actGetInfoMovieTheaterAPI = (maPhim) => {
+export const actGetInfoMovieTheaterAPI = maPhim => {
   return dispatch => {
     cinemaService
       .getInfoMovieTheaterAxios(maPhim)
@@ -42,6 +43,22 @@ export const actGetInfoMovieTheaterAPI = (maPhim) => {
         dispatch({
           type: ActionType.GET_INFO_MOVIE_THEATER,
           movieTheater: result.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+export const actGetThongTinLichChieuTheoHeThongRapAPI = maHeThong => {
+  return dispatch => {
+    cinemaService
+      .getThongTinLichChieuTheoHeThongRapAxios(maHeThong)
+      .then(result => {
+        dispatch({
+          type: ActionType.GET_THONG_TIN_LICH_CHIEU_HE_THONG_RAP,
+          ttLichChieuHeThongRap: result.data
         });
       })
       .catch(err => {

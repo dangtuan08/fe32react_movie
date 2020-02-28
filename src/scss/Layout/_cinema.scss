@@ -66,6 +66,9 @@
   .wrapMovie {
     max-height: 400px;
     overflow: auto;
+    img{
+      width: 60px;
+    }
     .movie-info {
       cursor: pointer;
       p {

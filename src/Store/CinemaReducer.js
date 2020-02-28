@@ -3,7 +3,8 @@ import * as ActionType from "../Store/Type/ActionTypeMovie";
 const initialState = {
   listCinema: [],
   listTheater: [],
-  movieTheater: {}
+  movieTheater: {},
+  ttLichChieuHeThongRap: []
 };
 
 const CinemaReducer = (state = initialState, action) => {
@@ -16,6 +17,9 @@ const CinemaReducer = (state = initialState, action) => {
       return { ...state };
     case ActionType.GET_INFO_MOVIE_THEATER:
       state.movieTheater = action.movieTheater;
+      return { ...state };
+    case ActionType.GET_THONG_TIN_LICH_CHIEU_HE_THONG_RAP:
+      state.ttLichChieuHeThongRap = [...state.ttLichChieuHeThongRap, action.ttLichChieuHeThongRap];
       return { ...state };
     default:
       return state;

@@ -25,6 +25,13 @@ class CinemaService {
       url: `http://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`
     });
   };
+
+  getThongTinLichChieuTheoHeThongRapAxios = maHeThong => {
+    return Axios({
+      method: "GET",
+      url: `http://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${maHeThong}&maNhom=GP01`
+    });
+  };
 }
 
 export default CinemaService;

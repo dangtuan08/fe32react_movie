@@ -1,5 +1,6 @@
 import Home from "./Screens/Home/Index";
 import DetailMovie from "./Screens/Home/Detail-movie/";
+import BookingTix from "./Screens/Home/Booking-Tix/";
 
 const routesHome = [
   {
@@ -11,6 +12,11 @@ const routesHome = [
     path: "/detail-movie/:id",
     exact: false,
     component: DetailMovie
+  },
+  {
+    path: "/booking-tix/:id",
+    exact: false,
+    component: BookingTix
   }
 ];
 

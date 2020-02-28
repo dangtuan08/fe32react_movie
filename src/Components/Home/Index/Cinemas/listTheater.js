@@ -13,7 +13,10 @@ class Theater extends Component {
 
   componentDidMount() {
     console.log(this.props);
-    this.props.getListTheater(this.props.maHeThongRap);
+    if(this.props.listTheater.length===0){
+      this.props.getListTheater(this.props.maHeThongRap);
+    }
+    
     cinemaService
       .getListTheaterAxios(this.props.maHeThongRap)
       .then(result => {
@@ -21,26 +24,24 @@ class Theater extends Component {
           {
             dsCumRap: result.data
           },
-          () => {}
+          () => {
+            console.log(this.state);
+          }
         );
       })
       .catch();
   }
-  // componentWillReceiveProps(){
-  //     console.log(this.props);
-
-  // }
   renderTheater() {
-    console.log(this.state.dsCumRap);
+    // console.log(this.state.dsCumRap);
     let { dsCumRap } = this.state;
     if (dsCumRap.length >= 0) {
       return dsCumRap.map((item, index) => {
-        if ((index === 0)) {
+        if (index === 0) {
           return (
             <li className="nav-item w-100" key={index}>
               <a
                 className="nav-link active"
-                id={item.maCumRap}
+                id={index}
                 data-toggle="tab"
                 href={"#" + item.maCumRap}
                 role="tab"
@@ -63,11 +64,12 @@ class Theater extends Component {
               </a>
             </li>
           );
-        }else{
-          return <li className="nav-item w-100" key={index}>
+        } else {
+          return (
+            <li className="nav-item w-100" key={index}>
               <a
                 className="nav-link"
-                id={item.maCumRap}
+                id={index}
                 data-toggle="tab"
                 href={"#" + item.maCumRap}
                 role="tab"
@@ -89,7 +91,7 @@ class Theater extends Component {
                 </div>
               </a>
             </li>
-          
+          );
         }
       });
     }

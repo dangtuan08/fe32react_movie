@@ -1,0 +1,32 @@
+.booking-tix {
+    .nav {
+      justify-content: center;
+      border: none;
+      .nav-item {
+        &:hover {
+          .nav-link {
+            border: none;
+            font-size: $fs-3;
+          }
+        }
+        .nav-link.active {
+          border: none;
+          font-size: $fs-3;
+          font-weight: $fw-bold;
+          color: $color-red-0;
+          // border-bottom: 5px solid $color-blue;
+        }
+        .nav-link {
+          @include text($color-black-0, $fs-2, $fw-normal);
+          border: none;
+          transition: all 0.2s;
+        }
+      }
+    }
+    .tab-content{
+      #detail{
+        
+      }
+    }
+  }
+  
