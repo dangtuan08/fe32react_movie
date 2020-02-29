@@ -9,10 +9,16 @@ class MovieService {
     });
   };
 
-  getListMoviePageAxios = (soPhanTu=4) => {
+  getListMoviePageAxios = (soPhanTu = 4) => {
     return Axios({
       method: "GET",
       url: `http://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=1&soPhanTuTrenTrang=${soPhanTu}`
+    });
+  };
+  getMovieDetailAxios = maPhim => {
+    return Axios({
+      method: "GET",
+      url: `http://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`
     });
   };
 }

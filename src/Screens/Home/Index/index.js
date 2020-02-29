@@ -6,8 +6,7 @@ import ListMovie from "../../../Components/Home/Index/ListMovie/ListMovie";
 import * as actionMovie from "../../../Store/Actions/Movie";
 import * as actionCinema from '../../../Store/Actions/Cinema'
 import { connect } from "react-redux";
-import ModalLogin from "../../../Components/Home/Index/Modal/ModalLogin";
-import ModalSignUp from "../../../Components/Home/Index/Modal/ModalSignUp";
+
 import Cinemas from "../../../Components/Home/Index/Cinemas/cinemas";
 import Login from "../../../HOC/Login";
 import WithModal from "../../../HOC/with_modal";
@@ -29,8 +28,7 @@ class Index extends Component {
         <ListMovie/>
         <Cinemas/>
 
-        <ModalLogin/> 
-        <ModalSignUp/>
+
       
       </>
     );

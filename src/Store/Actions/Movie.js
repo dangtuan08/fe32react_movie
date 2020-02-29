@@ -36,10 +36,7 @@ export const actGetListMoviePageAPI = (soPhanTu) => {
 
 export const actGetDetailMovieAPI = id => {
   return dispatch => {
-    Axios({
-      method: "GET",
-      url: `http://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`
-    })
+    movieService.getMovieDetailAxios(id)
       .then(result => {
         dispatch({
           type: ActionType.GET_DETAIL_MOVIE,

@@ -156,9 +156,10 @@ class Cinemas extends Component {
     }
   }
   render() {
+    var bg=require('./../../../../Assets/img/back-news.png')
     return (
       <section className="cinema">
-        <div className="col-xs-12" id="homeCinemaComplex" />
+        <div className="col-xs-12" id="homeCinemaComplex" style ={ { backgroundImage: "url("+bg+")" } }/>
         <div className="container py-5">
           <div className="row">
             <div className="col-sm-12">
@@ -173,7 +174,7 @@ class Cinemas extends Component {
             </div>
           </div>
         </div>
-        <div className="col-xs-12" id="homeCinemaComplex" />
+        <div className="col-xs-12" id="homeCinemaComplex" style ={ { backgroundImage: "url("+bg+")" } } />
       </section>
     );
   }

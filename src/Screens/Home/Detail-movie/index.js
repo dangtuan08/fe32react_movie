@@ -1,33 +1,74 @@
 import React, { Component } from "react";
+import InfoMovie from "../../../Components/Home/Detail/InfoMovie";
+import { connect } from "react-redux";
+import * as actionMovie from "../../../Store/Actions/Movie";
+import { movieService } from "../../../Services/index";
 
-export default class DetailMovie extends Component {
+import { css } from "@emotion/core";
+// First way to import
+import { ClipLoader, GridLoader} from "react-spinners";
+
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  margin-top:200px;
+  margin-bottom:500px;
+  z-index:9900;
+`;
+
+class DetailMovie extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true,
+      movieInfo: {}
+    };
+  }
+
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    // this.props.getDetailMovie(id);
+    movieService
+      .getMovieDetailAxios(id)
+      .then(result => {
+        this.setState(
+          {
+            movieInfo: result.data,
+            loading: false
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
+    if (this.state.loading) {
+      return (
+        <div className="sweet-loading">
+          <GridLoader
+            css={override}
+            size={30}
+            //size={"150px"} this also works
+            color={"#123abc"}
+            loading={this.state.loading}
+          />
+        </div>
+      );
+    }
     return (
       <>
         <div>
           {/* thông tin phim */}
-          <section className="container detail-movie">
-            <div className="row">
-              <div className="col-sm-3 ">
-                <div className="detail-movie-img">
-                  <img
-                    className="img-fluid w-100"
-                    height={300}
-                    src="./../img/chi-chi-em-em-sister-sister-c18-15747394235000_215x318.jpg"
-                  />
-                  <button className="btn-trailer show-hover">
-                    <img src="./img/play-video.png" alt="play-video" />
-                  </button>
-                </div>
-              </div>
-              <div className="col-sm-5">
-                <p>07.02.2020</p>
-                <h2>Birds of Prey: Cuộc Lột Xác Huy Hoàng Của Harley Quinn</h2>
-                <p>105 phút - 0 IMDb - 2D/Digital</p>
-                <button className="btn btn-success">Mua vé</button>
-              </div>
-            </div>
-          </section>
+          <InfoMovie movieInfo={this.state.movieInfo}/>
+
           {/* đặt vé */}
           <section className="container booking-tix">
             {/* div hình nên đen */}
@@ -219,3 +260,12 @@ export default class DetailMovie extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispath => {
+  return {
+    getDetailMovie: id => {
+      dispath(actionMovie.actGetDetailMovieAPI(id));
+    }
+  };
+};
+export default connect(null, mapDispatchToProps)(DetailMovie);

@@ -3,9 +3,8 @@ import * as ActionType from "../Store/Type/ActionTypeMovie";
 const initialState = {
   listMovie: [],
   listMoviePage: {},
-  movie: {},
-  MovieID: "",
-  maCumRap: ""
+
+  MovieInfo:{},
 };
 
 const MovieReducer = (state = initialState, action) => {
@@ -15,6 +14,9 @@ const MovieReducer = (state = initialState, action) => {
       return { ...state };
     case ActionType.GET_LIST_MOVIE_PAGE:
       state.listMoviePage = action.listMoviePage;
+      return { ...state };
+    case ActionType.GET_DETAIL_MOVIE:
+      state.MovieInfo = action.movie;
       return { ...state };
     default:
       return state;

@@ -60,9 +60,11 @@ class ListMovieOfTheater extends Component {
   renderDsPhim = () => {
     if (this.state.dsPhim.length > 0) {
       // console.log("ds phim co ton ta");
-
+      //duyệt mảng danh sách phim của cụm rạp chiếu
       return this.state.dsPhim.map((item, stt) => {
+        // duyet mảng danh sách chi tiết các bộ phim để lấy thông tin
         return this.props.listMovie.map((movie, index) => {
+          // nếu mã phim của cụm rạp bằng mã phim trong danh sách chi tiết các bộ phim thì render thông tin phim + thời gian lịch chiếu trong mảng danh sách phim
           if (item.maPhim === movie.maPhim) {
             return (
               <div className="wrapMovie" key={index}>
@@ -89,7 +91,8 @@ class ListMovieOfTheater extends Component {
                 </div>
                 <div id={index} className="listTime pt-2 collapse show">
                   <p className="s-version">2D Digital</p>
-                  <MovieTime/>
+                  {/* truyền vào mảng lịch chiếu cho các nút để lấy ra giờ chiếu */}
+                  <MovieTime lstLichChieuTheoPhim={item.lstLichChieuTheoPhim}/>
                   {/* <button
                     type="button"
                     className="btn btn-outline-secondary mr-2 mb-2"

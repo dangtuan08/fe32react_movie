@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as action from "../../../../Store/Actions/User";
 // import logo from './img/web-logo.png'
@@ -117,7 +117,7 @@ class Header extends Component {
             <NavLink className="navbar-brand" to="/">
               <img
                 className="img-fluid"
-                src="./img/web-logo.png"
+                src={require('../../../../Assets/img/web-logo.png')} 
                 alt="web-logo.png"
               />
             </NavLink>
@@ -137,25 +137,25 @@ class Header extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav ml-auto mr-auto">
-                <li className="nav-item active">
-                  <NavLink className="nav-link" to="/#homeTools">
+                <li className="nav-item ">
+                  <Link className="nav-link"  activeClassName="active" to="/" >
                     Lịch chiếu
-                  </NavLink>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" activeClassName="active" to="/#" >
                     Cụm rạp
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" activeClassName="active" to="/#" >
                     Tin tức
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" activeClassName="active" to="/#" >
                     Ứng dụng
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <ul className="navbar-nav my-2 my-lg-0">
