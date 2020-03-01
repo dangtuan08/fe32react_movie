@@ -1,21 +1,31 @@
 .detail-movie {
-    padding-top: 100px;
-    .detail-movie-img {
-      position: relative;
+  padding-top: 100px;
+  .detail-movie-img {
+    position: relative;
+    height: 400px;
+    &:hover {
       .btn-trailer {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background: none;
-          border: none;
-          &:hover {
-            opacity: 0.5;
-          }
-          img {
-            width: 50px;
-          }
-        }
+        opacity: 1;
+        visibility: visible;
+      }
+      
+    }
+    .img-movie {
+      height: 400px !important;
+    }
+    .btn-trailer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: none;
+      border: none;
+      &:hover {
+        opacity: 0.5;
+      }
+      img {
+        width: 80px;
+      }
     }
   }
-  
+}

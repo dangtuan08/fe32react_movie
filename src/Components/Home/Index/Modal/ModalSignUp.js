@@ -16,7 +16,7 @@ export default class ModalSignUp extends Component {
         console.log(result.data);
         Swal.fire({
           icon: "success",
-          title: "Đăng nhập thành công",
+          title: "Đăng ký thành công",
           text: ""
         });
       })

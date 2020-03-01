@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import InfoMovie from "../../../Components/Home/Detail/InfoMovie";
 import { connect } from "react-redux";
 import * as actionMovie from "../../../Store/Actions/Movie";
-import { movieService } from "../../../Services/index";
+import { movieService, cinemaService } from "../../../Services/index";
 
 import { css } from "@emotion/core";
 // First way to import
-import { ClipLoader, GridLoader} from "react-spinners";
-
+import { ClipLoader, GridLoader } from "react-spinners";
+import Booking from "../../../Components/Home/Detail/booking";
 
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
-  margin-top:200px;
-  margin-bottom:500px;
-  z-index:9900;
+  margin-top: 200px;
+  margin-bottom: 500px;
+  z-index: 9900;
 `;
 
 class DetailMovie extends Component {
@@ -24,7 +24,8 @@ class DetailMovie extends Component {
 
     this.state = {
       loading: true,
-      movieInfo: {}
+      movieInfo: {},
+      lichChieuPhim:{},
     };
   }
 
@@ -47,9 +48,20 @@ class DetailMovie extends Component {
       .catch(err => {
         console.log(err);
       });
+    cinemaService
+      .getInfoMovieTheaterAxios(id)
+      .then(result => {
+        this.setState({
+          lichChieuPhim: result.data
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
+    let bg = require("../../../Assets/img/back-news.png");
     if (this.state.loading) {
       return (
         <div className="sweet-loading">
@@ -67,19 +79,23 @@ class DetailMovie extends Component {
       <>
         <div>
           {/* thông tin phim */}
-          <InfoMovie movieInfo={this.state.movieInfo}/>
+          <InfoMovie movieInfo={this.state.movieInfo} />
 
           {/* đặt vé */}
-          <section className="container booking-tix">
+          <section className="container booking-tix" id="lichChieu">
             {/* div hình nên đen */}
-            <div className="col-xs-12" id="homeCinemaComplex" />
+            <div
+              className="col-xs-12"
+              id="homeCinemaComplex"
+              style={{ backgroundImage: "url(" + bg + ")" }}
+            />
             <ul className="nav nav-tabs mb-4" id="myTab-movie" role="tablist">
               <li className="nav-item">
                 <a
                   className="nav-link active"
                   id="lichChieu-tab"
                   data-toggle="tab"
-                  href="#lichChieu"
+                  href="#datVe"
                   role="tab"
                   aria-controls="movie"
                   aria-selected="true"
@@ -118,11 +134,12 @@ class DetailMovie extends Component {
               {/* tab đặt vé */}
               <div
                 className="tab-pane fade show active"
-                id="lichChieu"
+                id="datVe"
                 role="tabpanel"
                 aria-labelledby="movie-tab"
               >
-                <section className="homeTools py-5" id="homeTools">
+                <Booking lichChieuPhim={this.state.lichChieuPhim}/>
+                {/* <section className="homeTools py-5" id="homeTools">
                   <div className="container">
                     <div className="row homeTools--row ">
                       <div className="col-lg-3 col-md-3 homeTools-item">
@@ -180,14 +197,14 @@ class DetailMovie extends Component {
                       </div>
                     </div>
                   </div>
-                </section>
+                </section> */}
               </div>
               {/* tab trailer */}
               <div
                 className="tab-pane fade text-center"
                 id="detail"
                 role="tabpanel"
-                aria-labelledby="trailer-tab"
+                aria-labelledby="detail-tab"
               >
                 <div className="row detailMainStyle text-left">
                   <div className="col-6 col-xs-12 film left">
@@ -253,7 +270,11 @@ class DetailMovie extends Component {
                 />
               </div>
             </div>
-            <div className="col-xs-12" id="homeCinemaComplex" />
+            <div
+              className="col-xs-12"
+              id="homeCinemaComplex"
+              style={{ backgroundImage: "url(" + bg + ")" }}
+            />
           </section>
         </div>
       </>

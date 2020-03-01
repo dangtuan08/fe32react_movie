@@ -30,7 +30,7 @@ class Header extends Component {
             <NavLink className="navbar-brand" to="/">
               <img
                 className="img-fluid"
-                src="./img/web-logo.png"
+                src={require('../../../../Assets/img/web-logo.png')} 
                 // src={logo}
                 alt="web-logo.png"
               />
