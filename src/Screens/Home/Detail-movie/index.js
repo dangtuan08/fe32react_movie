@@ -8,7 +8,7 @@ import { css } from "@emotion/core";
 // First way to import
 import { ClipLoader, GridLoader } from "react-spinners";
 import Booking from "../../../Components/Home/Detail/booking";
-
+import DetailMovieTab from "../../../Components/Home/Detail/detailMovieTab";
 const override = css`
   display: block;
   margin: 0 auto;
@@ -30,6 +30,8 @@ class DetailMovie extends Component {
   }
 
   componentDidMount() {
+    // console.log(this.props.match.params.id);
+    
     const id = this.props.match.params.id;
     // this.props.getDetailMovie(id);
     movieService
@@ -41,7 +43,7 @@ class DetailMovie extends Component {
             loading: false
           },
           () => {
-            console.log(this.state);
+            // console.log(this.state);
           }
         );
       })
@@ -206,7 +208,8 @@ class DetailMovie extends Component {
                 role="tabpanel"
                 aria-labelledby="detail-tab"
               >
-                <div className="row detailMainStyle text-left">
+                <DetailMovieTab movieInfo={this.state.movieInfo}/>
+                {/* <div className="row detailMainStyle text-left">
                   <div className="col-6 col-xs-12 film left">
                     <div className="row rowLeftInfo">
                       <p className="col-6 contentTitle">Ngày phát hành</p>
@@ -254,6 +257,7 @@ class DetailMovie extends Component {
                     </div>
                   </div>
                 </div>
+               */}
               </div>
               {/* tab thảo luận */}
               <div

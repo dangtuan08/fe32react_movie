@@ -15,7 +15,7 @@ export default class InfoMovie extends Component {
     this.setState({ isOpen: true });
   }
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const getVideoId = require("get-video-id");
     let videoID = getVideoId(this.props.movieInfo.trailer);
     return (
