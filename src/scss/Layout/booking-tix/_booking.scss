@@ -3,6 +3,7 @@
   //   height: 1000px;
 
   .booking-seat {
+    height: 640px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     .list-seat {
       // text-align: center;
@@ -14,12 +15,17 @@
       height: 25px;
       cursor: pointer;
       border-radius: 5px;
+      font-size: 13px;
+      // vertical-align: middle;
     }
     .seat-vip {
       background-color: #f7b500;
     }
     .seat-disable {
       background-color: rgba(16, 34, 53, 0.2);
+    }
+    .seat-click {
+      background-color: #44c020;
     }
   }
 

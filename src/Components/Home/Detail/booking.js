@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
+import Swal from "sweetalert2";
 
-export default class Booking extends Component {
+class Booking extends Component {
   constructor(props) {
     super(props);
 
@@ -123,6 +124,20 @@ export default class Booking extends Component {
           );
         }
 
+        break;
+      case "muaVe":
+        if (localStorage.getItem("user")) {
+          const { history } = this.props;
+          console.log(history);
+          
+          if (history) history.push(`/booking-tix/${this.state.maLichChieu}`);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Vui lòng đăng nhập trước"
+            // text: "Tài khoản hoặc mật khẩu không đúng"
+          });
+        }
         break;
       default:
         break;
@@ -400,12 +415,19 @@ export default class Booking extends Component {
                 this.state.chonCumRap &&
                 this.state.chonNgayXem &&
                 this.state.chonXuatChieu ? (
-                  <Link
+                  // <Link
+                  //   className="btn btn-success text-center btn-buy-ticket w-100"
+                  //   to={`/booking-tix/${this.state.maLichChieu}`}
+                  // >
+                  //   Mua vé
+                  // </Link>
+                  <button
                     className="btn btn-success text-center btn-buy-ticket w-100"
-                    to={`/booking-tix/${this.state.maLichChieu}`}
+                    name="muaVe"
+                    onClick={this.handleOnClick}
                   >
                     Mua vé
-                  </Link>
+                  </button>
                 ) : (
                   <button
                     className="btn btn-success text-center btn-buy-ticket"
@@ -422,3 +444,5 @@ export default class Booking extends Component {
     );
   }
 }
+
+export default withRouter(Booking);

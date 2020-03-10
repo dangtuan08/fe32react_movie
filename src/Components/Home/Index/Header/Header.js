@@ -138,22 +138,22 @@ class Header extends Component {
             >
               <ul className="navbar-nav ml-auto mr-auto">
                 <li className="nav-item ">
-                  <Link className="nav-link"  activeClassName="active" to="/" >
+                  <Link className="nav-link" to="/" >
                     Lịch chiếu
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" activeClassName="active" to="/#" >
+                  <Link className="nav-link" to="/#" >
                     Cụm rạp
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" activeClassName="active" to="/#" >
+                  <Link className="nav-link" to="/#" >
                     Tin tức
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" activeClassName="active" to="/#" >
+                  <Link className="nav-link" to="/#" >
                     Ứng dụng
                   </Link>
                 </li>

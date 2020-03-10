@@ -12,3 +12,6 @@ export const GET_THONG_TIN_LICH_CHIEU_HE_THONG_RAP = "GET_THONG_TIN_LICH_CHIEU_H
 export const LOGIN = "LOGIN"
 export const SIGNUP = "SIGNUP"
 export const SET_USER_LOGIN = "SET_USER_LOGIN"
+
+
+export const GHE_DANG_CHON = "GHE_DANG_CHON"
