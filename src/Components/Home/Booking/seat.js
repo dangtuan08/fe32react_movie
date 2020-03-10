@@ -14,6 +14,10 @@ class Seat extends Component {
     this.setState({ click: !this.state.click });
   }
 
+  componentWillUnmount(){
+    this.props.resetListSeat();
+  }
+
   handleOnClick = (e) => {
     this.changeColor();
     this.props.selectSeat({
@@ -64,6 +68,9 @@ const mapDispatchToProps = dispath => {
   return {
     selectSeat: seat => {
       dispath(action.actChonGhe(seat));
+    },
+    resetListSeat:seat=>{
+      dispath(action.actResetListSeat());
     }
   };
 };

@@ -11,3 +11,11 @@ export const actChonGhe = (seat) => {
   };
 };
 
+export const actResetListSeat = () => {
+  return dispatch => {
+    dispatch({
+        type: ActionType.RESET_DANH_SACH_GHE,
+        value: []
+      });
+  };
+};

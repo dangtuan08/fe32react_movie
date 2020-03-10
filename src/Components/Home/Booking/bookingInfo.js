@@ -13,6 +13,8 @@ class BookingInfo extends Component {
     });
   };
 
+
+
   renderGia = () => {
     let thanhTien = 0;
     this.props.listSeat.map((item, index) => {

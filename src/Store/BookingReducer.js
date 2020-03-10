@@ -27,6 +27,9 @@ const BookingReducer = (state = initialState, action) => {
       }
 
       return { ...state };
+      case ActionType.RESET_DANH_SACH_GHE:
+        state.listSeat = []
+        return { ...state };
     default:
       return state;
   }

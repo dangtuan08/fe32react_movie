@@ -15,3 +15,4 @@ export const SET_USER_LOGIN = "SET_USER_LOGIN"
 
 
 export const GHE_DANG_CHON = "GHE_DANG_CHON"
+export const RESET_DANH_SACH_GHE = "RESET_DANH_SACH_GHE"
