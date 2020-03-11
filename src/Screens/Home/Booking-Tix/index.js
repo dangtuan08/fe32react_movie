@@ -29,6 +29,7 @@ class BookingTix extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     console.log(this.props.match.params.id);
     console.log(this.props.history);
     const id = this.props.match.params.id;

@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import shortid from "shortid";
 
 class BookingInfo extends Component {
   renderTenGhe = () => {
@@ -13,8 +14,6 @@ class BookingInfo extends Component {
     });
   };
 
-
-
   renderGia = () => {
     let thanhTien = 0;
     this.props.listSeat.map((item, index) => {
@@ -22,12 +21,18 @@ class BookingInfo extends Component {
     });
     return thanhTien;
   };
+  getId = () => {
+    const id = shortid.generate();
+    console.log(id);
+    return id;
+  };
+
   render() {
     let { chiTietLichChieu } = this.props;
     console.log(this.props.listSeat);
 
     return (
-      <>
+      <Fragment key={this.getId()}>
         <div className="text-center py-4">
           <h1 className="money">{this.renderGia()} VND</h1>
         </div>
@@ -50,7 +55,7 @@ class BookingInfo extends Component {
           <hr />
         </div>
         <div className="booking-btn-buy btn btn-success py-3">ĐẶT VÉ</div>
-      </>
+      </Fragment>
     );
   }
 }

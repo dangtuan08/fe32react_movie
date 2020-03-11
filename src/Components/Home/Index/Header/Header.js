@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
+
 import { connect } from "react-redux";
 import * as action from "../../../../Store/Actions/User";
 // import logo from './img/web-logo.png'
 class Header extends Component {
-  
   componentDidMount() {
     let user = JSON.parse(localStorage.getItem("user"));
 
     if (user) {
-      
-      this.props.setUserLogin(user)
+      this.props.setUserLogin(user);
     }
   }
   handleOnclick = event => {
@@ -30,7 +30,7 @@ class Header extends Component {
             <NavLink className="navbar-brand" to="/">
               <img
                 className="img-fluid"
-                src={require('../../../../Assets/img/web-logo.png')} 
+                src={require("../../../../Assets/img/web-logo.png")}
                 // src={logo}
                 alt="web-logo.png"
               />
@@ -52,14 +52,14 @@ class Header extends Component {
             >
               <ul className="navbar-nav ml-auto mr-auto">
                 <li className="nav-item active">
-                  <NavLink className="nav-link" to="/">
+                  <Link className="nav-link" to="/#listMovie">
                     Lịch chiếu
-                  </NavLink>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" to="/#cinema">
                     Cụm rạp
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">
@@ -117,7 +117,7 @@ class Header extends Component {
             <NavLink className="navbar-brand" to="/">
               <img
                 className="img-fluid"
-                src={require('../../../../Assets/img/web-logo.png')} 
+                src={require("../../../../Assets/img/web-logo.png")}
                 alt="web-logo.png"
               />
             </NavLink>
@@ -138,22 +138,22 @@ class Header extends Component {
             >
               <ul className="navbar-nav ml-auto mr-auto">
                 <li className="nav-item ">
-                  <Link className="nav-link" to="/" >
+                  <Link className="nav-link" to="/#listMovie">
                     Lịch chiếu
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/#" >
+                  <Link className="nav-link" to="/#">
                     Cụm rạp
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/#" >
+                  <Link className="nav-link" to="/#">
                     Tin tức
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/#" >
+                  <Link className="nav-link" to="/#">
                     Ứng dụng
                   </Link>
                 </li>
@@ -207,4 +207,4 @@ const mapDispatchToProps = dispath => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

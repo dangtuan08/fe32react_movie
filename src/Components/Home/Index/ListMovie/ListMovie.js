@@ -48,7 +48,7 @@ class ListMovie extends Component {
     
     return (
       <>
-        <section className="movies">
+        <section className="movies" id="listMovie">
           <div className="container">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
               <li className="nav-item">

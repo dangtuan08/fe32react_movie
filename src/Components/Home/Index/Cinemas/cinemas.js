@@ -158,7 +158,7 @@ class Cinemas extends Component {
   render() {
     var bg=require('./../../../../Assets/img/back-news.png')
     return (
-      <section className="cinema">
+      <section className="cinema" id="cinema">
         <div className="col-xs-12" id="homeCinemaComplex" style ={ { backgroundImage: "url("+bg+")" } }/>
         <div className="container py-5">
           <div className="row">

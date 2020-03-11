@@ -31,7 +31,7 @@ class DetailMovie extends Component {
 
   componentDidMount() {
     // console.log(this.props.match.params.id);
-    
+    window.scrollTo(0, 0);
     const id = this.props.match.params.id;
     // this.props.getDetailMovie(id);
     movieService
