@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import * as actionMovie from "../../../../Store/Actions/Movie";
 import * as actionCinema from "../../../../Store/Actions/Cinema";
 import { connect } from "react-redux";
+import Swal from "sweetalert2";
+import { withRouter } from "react-router-dom";
 
 class HomeTool extends Component {
   constructor(props) {
@@ -154,7 +156,7 @@ class HomeTool extends Component {
         });
       });
       // console.log(mangNgayChieu);
-      if (mangGioChieu.length >0) {
+      if (mangGioChieu.length > 0) {
         return mangGioChieu.map((item, index) => {
           return (
             <button
@@ -298,6 +300,18 @@ class HomeTool extends Component {
         }
       );
     }
+    if (event.target.name === "muaVe") {
+      console.log(event.target.value);
+      if (localStorage.getItem("user")) {
+        this.props.history.push(`/booking-tix/${event.target.value}`);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Vui lòng đăng nhập trước"
+          // text: "Tài khoản hoặc mật khẩu không đúng"
+        });
+      }
+    }
   };
 
   render() {
@@ -394,12 +408,26 @@ class HomeTool extends Component {
                 </div>
               </div>
               <div className="col-lg-2 col-md-2 homeTools--btnBuy">
-                {this.state.movieValid&&this.state.theaterValid&&this.state.dayValid&&this.state.xuatChieu.maLichChieu!==""?<button className="btn btn-success text-center btn-buy-ticket">
-                  Mua vé
-                </button>:<button className="btn btn-success text-center btn-buy-ticket" disabled>
-                  Mua vé
-                </button>}
-                
+                {this.state.movieValid &&
+                this.state.theaterValid &&
+                this.state.dayValid &&
+                this.state.xuatChieu.maLichChieu !== "" ? (
+                  <button
+                    className="btn btn-success text-center btn-buy-ticket"
+                    name="muaVe"
+                    value={this.state.xuatChieu.maLichChieu}
+                    onClick={this.handleOnClick}
+                  >
+                    Mua vé
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-success text-center btn-buy-ticket"
+                    disabled
+                  >
+                    Mua vé
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -427,4 +455,7 @@ const mapDispatchToProps = dispath => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeTool);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(HomeTool));

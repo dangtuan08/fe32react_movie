@@ -4,20 +4,20 @@ import Carousel from "../../../Components/Home/Index/Carousel/carousel";
 import HomeTool from "../../../Components/Home/Index/HomeTool/homeTool";
 import ListMovie from "../../../Components/Home/Index/ListMovie/ListMovie";
 import * as actionMovie from "../../../Store/Actions/Movie";
-import * as actionCinema from '../../../Store/Actions/Cinema'
+import * as actionCinema from "../../../Store/Actions/Cinema";
 import { connect } from "react-redux";
 
 import Cinemas from "../../../Components/Home/Index/Cinemas/cinemas";
 import Login from "../../../HOC/Login";
 import WithModal from "../../../HOC/with_modal";
 
-
 // const ModalLogin = WithModal(Login);
 
 class Index extends Component {
-  componentDidMount(){
+  componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.getListMovie();
-    this.props.getListCinema()
+    this.props.getListCinema();
   }
 
   render() {
@@ -25,15 +25,11 @@ class Index extends Component {
       <>
         <Carousel />
         <HomeTool />
-        <ListMovie/>
-        <Cinemas/>
-
-
-      
+        <ListMovie />
+        <Cinemas />
       </>
     );
   }
-  
 }
 
 // const mapStateToProps = state => {
@@ -48,9 +44,9 @@ const mapDispatchToProps = dispath => {
     getListMovie: () => {
       dispath(actionMovie.actGetListMovieAPI());
     },
-    getListCinema:()=>{
-      dispath(actionCinema.actGetListCinemaAPI())
+    getListCinema: () => {
+      dispath(actionCinema.actGetListCinemaAPI());
     }
   };
 };
-export default connect(null,mapDispatchToProps)(Index)
+export default connect(null, mapDispatchToProps)(Index);

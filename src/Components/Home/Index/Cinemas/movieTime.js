@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { date } from "yup";
-
-export default class MovieTime extends Component {
+import Swal from "sweetalert2";
+class MovieTime extends Component {
   constructor(props) {
     super(props);
 
@@ -40,26 +40,41 @@ export default class MovieTime extends Component {
       }
     );
   }
+  handleOnClick = e => {
+    if (localStorage.getItem("user")) {
+      if (e.target.name === "gioChieu")
+        this.props.history.push(`/booking-tix/${e.target.value}`);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Vui lòng đăng nhập trước"
+        // text: "Tài khoản hoặc mật khẩu không đúng"
+      });
+    }
+  };
 
   renderGioChieu() {
     let { gioChieu } = this.state;
     if (gioChieu.length > 0) {
       return gioChieu.map((item, index) => {
         return (
-          <NavLink
-          key={index}
+          <button
+            key={index}
             className="btn btn-outline-secondary mr-2 mb-2"
-            to={`/booking-tix/${item.maLichChieu}`}
+            value={item.maLichChieu}
+            name="gioChieu"
+            onClick={this.handleOnClick}
           >
             {item.gioChieu}
-          </NavLink>
+          </button>
         );
       });
     }
-    return ""
+    return "";
   }
 
   render() {
     return this.renderGioChieu();
   }
 }
+export default withRouter(MovieTime);
