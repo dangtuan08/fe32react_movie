@@ -17,42 +17,56 @@ class ListMovieOfTheater extends Component {
     // console.log(this.props);
     cinemaService
       .getThongTinLichChieuTheoHeThongRapAxios(this.props.maHeThongRap)
-      .then(result => {
-        this.setState(
-          {
-            thongTinLichChieuTheoHeThong: result.data
-          },
-          () => {
-            this.setPhim();
-          }
-        );
-      })
+      .then(
+        result => {
+          this.setState(
+            {
+              thongTinLichChieuTheoHeThong: result.data
+            },
+            () => {
+              this.setPhim();
+              // console.log(this.state);
+              
+            }
+          );
+        }
+      )
       .catch();
   }
   setPhim = () => {
     if (this.state.thongTinLichChieuTheoHeThong.length > 0) {
-      this.state.thongTinLichChieuTheoHeThong.map((item, index) => {
-        item.lstCumRap.map((item, index) => {
-          if (item.maCumRap === this.props.maCumRap) {
-            item.danhSachPhim.map((item, index) => {
+      let dsPhim=[]
+      this.state.thongTinLichChieuTheoHeThong.map((hethong, index) => {
+        // console.log(`thong tin lich chieu cua he thong${hethong.maHeThongRap}`,hethong);
+        
+        hethong.lstCumRap.map((cumRap, index) => {
+          if (cumRap.maCumRap === this.props.maCumRap) {
+            // console.log(`danh sach phim cua cum rạp ${cumRap.maCumRap} tương ứng ${this.props.maCumRap}`,cumRap.danhSachPhim);
+            
+            cumRap.danhSachPhim.map((item, index) => {
+
+              // console.log(`phim ${item.tenPhim} tương ứng ${this.props.maCumRap}`,item);
+              
               let phim = {
                 maPhim: item.maPhim,
                 tenPhim: item.tenPhim,
                 lstLichChieuTheoPhim: item.lstLichChieuTheoPhim
               };
-              this.setState(
-                {
-                  dsPhim: [...this.state.dsPhim, phim]
-                 
-                },
-                () => {
-                  // console.log(this.state);
-                }
-              );
+              dsPhim.push(phim)
+              
             });
           }
         });
       });
+      this.setState(
+        {
+          dsPhim
+        },
+        () => {
+        console.log(this.state.dsPhim);
+        
+        }
+      );
     } else {
       console.log("null");
     }
@@ -72,7 +86,6 @@ class ListMovieOfTheater extends Component {
                   className="movie-info  d-flex flex-row pt-3"
                   data-toggle="collapse"
                   data-target={"#" + index}
-                  
                 >
                   <img
                     className="pr-2"
@@ -92,14 +105,7 @@ class ListMovieOfTheater extends Component {
                 <div id={index} className="listTime pt-2 collapse show">
                   <p className="s-version">2D Digital</p>
                   {/* truyền vào mảng lịch chiếu cho các nút để lấy ra giờ chiếu */}
-                  <MovieTime lstLichChieuTheoPhim={item.lstLichChieuTheoPhim}/>
-                  {/* <button
-                    type="button"
-                    className="btn btn-outline-secondary mr-2 mb-2"
-                  >
-                    14:45
-                  </button> */}
-                  
+                  <MovieTime lstLichChieuTheoPhim={item.lstLichChieuTheoPhim} />
                 </div>
               </div>
             );
@@ -109,7 +115,11 @@ class ListMovieOfTheater extends Component {
         });
       });
     } else {
-      return <div><span>Không có xuất chiếu</span></div>;
+      return (
+        <div>
+          <span>Không có xuất chiếu</span>
+        </div>
+      );
     }
   };
   render() {
