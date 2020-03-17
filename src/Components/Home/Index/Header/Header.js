@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { connect } from "react-redux";
 import * as action from "../../../../Store/Actions/User";
 import shortid from "shortid";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 // import logo from './img/web-logo.png'
 class Header extends Component {
   componentDidMount() {
@@ -20,14 +20,44 @@ class Header extends Component {
     return id;
   };
   handleOnclick = event => {
+    let { history } = this.props;
     if (event.target.name === "logout") {
       localStorage.removeItem("user");
       this.props.setUserLogin({});
-      Swal.fire({
-        icon: "success",
-        title: "Đã đăng xuất",
-        text: ""
-      });
+      const url = this.props.match;
+      if (url.path === "/" || url.path === "/detail-movie/:id") {
+        Swal.fire({
+          icon: "success",
+          title: "Đã đăng xuất",
+          text: ""
+        });
+      } else {
+        let timerInterval;
+        Swal.fire({
+          icon: "success",
+          title: "Đăng xuất thành công!",
+          html: "Chuyển về trang chủ.",
+          timer: 2000,
+          timerProgressBar: true,
+          onBeforeOpen: () => {
+            Swal.showLoading();
+            timerInterval = setInterval(() => {}, 100);
+          },
+          // khi hết chờ hết 2000 mili giây thì alert đóng và chuyển về trang chủ history.push(`/`);
+          onClose: () => {
+            // history.push(`/`);
+
+            history.push(`/`);
+            clearInterval(timerInterval);
+          }
+        }).then(result => {
+          /* Read more about handling dismissals below */
+          // khi người dùng đóng hoặc ấn ra ngoài thông báo để tắt thì chuyển trang ngay
+          if (result.dismiss === Swal.DismissReason.timer) {
+            history.push(`/`);
+          }
+        });
+      }
     }
   };
 
@@ -164,4 +194,4 @@ const mapDispatchToProps = dispath => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));

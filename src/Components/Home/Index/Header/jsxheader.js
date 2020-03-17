@@ -1,3 +1,20 @@
+import React, { Component } from 'react'
+
+export default class jsxheader extends Component {
+  render() {
+    var frm = new FormData();
+    frm.append("File",File,tenfile);
+    frm.append("tenphim", tenphim);
+    frm.append("manhom","GP01");
+    return (
+      <div>
+        
+      </div>
+    )
+  }
+}
+
+
 <header className="header">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <NavLink className="navbar-brand" to="/">

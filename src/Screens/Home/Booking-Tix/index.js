@@ -80,7 +80,6 @@ class BookingTix extends Component {
   }
 
   render() {
-
     let { chiTietLichChieu } = this.state;
     if (this.state.loading) {
       return (
@@ -121,21 +120,48 @@ class BookingTix extends Component {
                   <div className="col-12 pb-5">
                     {this.renderListSeat()}
                     <div className="row list-seat py-5">
-                      <span className="seat mr-1 mb-1"></span>
-                      <span className="pr-5">Ghế thường</span>
+                      <div className="d-contents col-6 col-sm-6 col-lg-3">
+                        <span className="seat mr-1 mb-1 seat-info"></span>
+                        <span className="pr-4">Ghế thường</span>
+                      </div>
+                      <div className="d-contents col-6 col-sm-6 col-lg-3">
+                        <span className="seat seat-vip mr-1 mb-1 seat-info" />{" "}
+                        <span className="pr-4">Ghế VIP</span>
+                      </div>
+                      <div className="d-contents col-6 col-sm-6 col-lg-3">
+                        <span
+                          className="seat seat-disable mr-1 mb-1 seat-info"
+                          disable="true"
+                        />
+                        <span className="pr-4">Ghế đã mua</span>
+                      </div>
+                      <div className="d-contents col-6 col-sm-6 col-lg-3">
+                        <span
+                          className="seat seat-click mr-1 mb-1 seat-info"
+                          disable="true"
+                        />
+                        <span className="pr-4">Ghế đang chọn</span>
+                      </div>
+                      {/* <span className="seat mr-1 mb-1"></span>
+                      <span className="pr-4">Ghế thường</span>
                       <span className="seat seat-vip mr-1 mb-1" />{" "}
-                      <span className="pr-5">Ghế VIP</span>
+                      <span className="pr-4">Ghế VIP</span>
                       <span
                         className="seat seat-disable mr-1 mb-1"
                         disable="true"
                       />
-                      <span className="pr-5">Ghế đã có người mua</span>
+                      <span className="pr-4">Ghế đã có người mua</span>
+                      <span
+                        className="seat seat-click mr-1 mb-1"
+                        disable="true"
+                      />
+                      <span className="pr-4">Ghế đang chọn</span> */}
                     </div>
                   </div>
                 </div>
               </div>
               <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-4 booking-info">
-                <BookingInfo chiTietLichChieu={chiTietLichChieu}/>
+                <BookingInfo chiTietLichChieu={chiTietLichChieu} />
               </div>
             </div>
           </div>
