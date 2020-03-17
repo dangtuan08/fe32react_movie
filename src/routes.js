@@ -1,6 +1,7 @@
 import Home from "./Screens/Home/Index";
 import DetailMovie from "./Screens/Home/Detail-movie/";
 import BookingTix from "./Screens/Home/Booking-Tix/";
+import DetailAccount from "./Screens/Home/Detail-Account";
 
 const routesHome = [
   {
@@ -17,6 +18,11 @@ const routesHome = [
     path: "/booking-tix/:id",
     exact: false,
     component: BookingTix
+  },
+  {
+    path: "/chi-tiet-tai-khoan",
+    exact: false,
+    component: DetailAccount
   }
 ];
 
@@ -32,6 +38,5 @@ const routesHome = [
 //     component: ThemNguoiDung
 //   }
 // ];
-
 
 export { routesHome };

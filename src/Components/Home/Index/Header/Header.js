@@ -53,9 +53,9 @@ class Header extends Component {
               <a className="dropdown-item" href="#">
                 Thông tin tài khoản
               </a>
-              <a className="dropdown-item" href="#">
+              <Link className="dropdown-item" to="/chi-tiet-tai-khoan">
                 Đặt vé
-              </a>
+              </Link>
               <div className="dropdown-divider" />
               <button
                 className="dropdown-item"

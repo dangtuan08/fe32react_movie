@@ -28,6 +28,14 @@ class UserService {
       data: user
     });
   };
+  infoUserAxios = userName => {
+    return Axios({
+      method: "POST",
+      url:
+        "http://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan",
+      data: userName
+    });
+  };
 }
 
 export default UserService;
