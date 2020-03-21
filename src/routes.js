@@ -2,7 +2,9 @@ import Home from "./Screens/Home/Index";
 import DetailMovie from "./Screens/Home/Detail-movie/";
 import BookingTix from "./Screens/Home/Booking-Tix/";
 import DetailAccount from "./Screens/Home/Detail-Account";
-
+import LoginAdmin from "./Screens/Admin/LoginAdmin";
+import MovieManagement from "./Screens/Admin/MovieManagement/MovieManagement";
+import UserManagement from "./Screens/Admin/UserManagement/UserManagement";
 const routesHome = [
   {
     path: "/",
@@ -26,17 +28,22 @@ const routesHome = [
   }
 ];
 
-// const routesAdmin = [
-//   {
-//     path: "/dash-board",
-//     exact: false,
-//     component: DashBoard
-//   },
-//   {
-//     path: "/them-nguoi-dung",
-//     exact: false,
-//     component: ThemNguoiDung
-//   }
-// ];
+const routesAdmin = [
+  {
+    path: "/dash-board",
+    exact: false,
+    component: LoginAdmin
+  },
+  {
+    path: "/quan-ly-phim",
+    exact: false,
+    component: MovieManagement
+  },
+  {
+    path: "/quan-ly-user",
+    exact: false,
+    component: UserManagement
+  }
+];
 
-export { routesHome };
+export { routesHome, routesAdmin };

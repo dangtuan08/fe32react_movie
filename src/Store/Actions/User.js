@@ -38,3 +38,28 @@ export const actSetUserLogin = (user) => {
     });
   };
 };
+
+export const actLoginAdmin = (user, history) => {
+  return dispatch => {
+    // Axios({
+    //   method: "POST",
+    //   url: "http://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+    //   data: user
+    // })
+    userService
+      .loginAxios(user)
+      .then(result => {
+        // console.log(result.data);
+        if (result.data.maLoaiNguoiDung === "QuanTri") {
+          localStorage.setItem("UserAdmin", JSON.stringify(result.data));
+          alert("Login success");
+          history.push("/quan-ly-phim");
+        } else {
+          alert("K có quyền truy cập");
+        }
+      })
+      .catch(err => {
+        console.log(err.response.data);
+      });
+  };
+};

@@ -1,16 +1,18 @@
 import React, { Fragment } from "react";
-import { Route, Redirect } from "react-router-dom";
-
+import { Route, Redirect, Link } from "react-router-dom";
+import NavBar from './../Components/Admin/Index/NavBar'
 const AdminLayout = props => {
   return (
     <Fragment>
-      <div>nav admin</div>
+     <NavBar/>
       {props.children}
     </Fragment>
   );
 };
 
 export default function AdminTemplate({ Component, ...props }) {
+  console.log(Component,props);
+  
   return (
     <Route
       {...props}

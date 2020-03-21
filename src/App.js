@@ -5,7 +5,9 @@ import { routesHome, routesAdmin } from "./routes";
 
 import Home from "./Screens/Home/Index";
 import HomeTemplate from './templates/home-template'  
+import AdminTemplate from './templates/admin-template'  
 import PageNotFound from './Screens/PageNotFound'
+import Admin from "./Screens/Admin/LoginAdmin/index";
 
 const showMenuHome = routes => {
   if (routes && routes.lenght !== 0) {
@@ -22,6 +24,20 @@ const showMenuHome = routes => {
   }
 };
 
+const showMenuAdmin = routes => {
+  if (routes && routes.length > 0) {
+    return routes.map((item, index) => {
+      return (
+        <AdminTemplate
+          key={index}
+          path={item.path}
+          exact={item.exact}
+          Component={item.component}
+        />
+      );
+    });
+  }
+};
 function App() {
   return (
     <BrowserRouter>
@@ -32,8 +48,8 @@ function App() {
         <Route path="/list-movie" component={ListMovie} /> */}
 
         {showMenuHome(routesHome)}
-        {/* {showMenuAdmin(routesAdmin)} */}
-
+        {showMenuAdmin(routesAdmin)}
+        <Route path="/admin" component={Admin} />
         {/* <Route path="/admin" component={Admin} /> */}
         {/* luôn để PageNotFound dưới cuối */}
         <Route path="" component={PageNotFound} />
