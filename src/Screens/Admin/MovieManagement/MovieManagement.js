@@ -25,18 +25,18 @@ export default function MovieManagement() {
       {
         title: "Hình ảnh",
         field: "hinhAnh",
-        type: "file",
-        editComponent: props => {
-          return (
-            // <input type="text" value={props.value} onChange={props.onChange} />
-            // <input type="file" onChange={handleOnChange} />
-            <input
-              type="file"
-              onChange={props.onChange}
-              value={handleOnChange}
-            />
-          );
-        },
+        type: "currency",
+        // editComponent: props => {
+        //   return (
+        //     // <input type="text" value={props.value} onChange={props.onChange} />
+        //     // <input type="file" onChange={handleOnChange} />
+        //     <input
+        //       type="file"
+        //       onChange={props.onChange}
+        //       value={handleOnChange}
+        //     />
+        //   );
+        // },
         render: rowData => <img src={rowData.hinhAnh} style={{ width: 50 }} />
       },
       { title: "Mô tả", field: "moTa" },
@@ -98,8 +98,13 @@ export default function MovieManagement() {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              console.log(newData.hinhAnh);
+              console.log(newData.ngayKhoiChieu);
               let userAD = JSON.parse(localStorage.getItem("UserAdmin"));
+              let day = new Date(newData.ngayKhoiChieu).toLocaleDateString(
+                "en-GB"
+              );
+              console.log(day);
+
               let movie = {
                 maPhim: "1234",
                 tenPhim: newData.tenPhim,
@@ -108,9 +113,10 @@ export default function MovieManagement() {
                 hinhAnh: newData.hinhAnh,
                 moTa: newData.moTa,
                 maNhom: newData.maNhom,
-                ngayKhoiChieu: newData.ngayKhoiChieu,
+                ngayKhoiChieu: day,
                 danhGia: newData.danhGia
               };
+
               movieService
                 .AddNewMovieAxios(movie, userAD.accessToken)
                 .then(result => {
@@ -126,6 +132,9 @@ export default function MovieManagement() {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
+
+              let day = new Date(oldData.ngayKhoiChieu).toLocaleDateString();
+              console.log(day);
               if (oldData) {
                 setState(prevState => {
                   const data = [...prevState.data];

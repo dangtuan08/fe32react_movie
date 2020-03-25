@@ -9,7 +9,7 @@ const HomeLayout = props => {
   return (
     <Fragment>
       <Navbar />
-      <div className="py-5"></div>
+      {/* <div className="py-5"></div> */}
       {props.children}
       <Footer />
 
