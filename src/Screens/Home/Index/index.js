@@ -8,10 +8,6 @@ import * as actionCinema from "../../../Store/Actions/Cinema";
 import { connect } from "react-redux";
 
 import Cinemas from "../../../Components/Home/Index/Cinemas/cinemas";
-import Login from "../../../HOC/Login";
-import WithModal from "../../../HOC/with_modal";
-
-// const ModalLogin = WithModal(Login);
 
 class Index extends Component {
   componentDidMount() {

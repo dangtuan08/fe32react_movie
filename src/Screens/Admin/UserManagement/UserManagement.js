@@ -69,7 +69,8 @@ export default function UserManagement() {
               email: newData.email,
               soDt: newData.soDt,
               matKhau: newData.matKhau,
-              maLoaiNguoiDung: newData.maLoaiNguoiDung
+              maLoaiNguoiDung: newData.maLoaiNguoiDung,
+              maNhom: "GP01"
             };
             let userAD = JSON.parse(localStorage.getItem("UserAdmin"));
             setTimeout(() => {
@@ -77,6 +78,7 @@ export default function UserManagement() {
               userService
                 .AddNewUserAxios(user, userAD.accessToken)
                 .then(result => {
+                  alert("Them thanh cong")
                   getData();
                 })
                 .catch(({...error}) => {
@@ -100,7 +102,8 @@ export default function UserManagement() {
               email: newData.email,
               soDt: newData.soDt,
               matKhau: newData.matKhau,
-              maLoaiNguoiDung: newData.maLoaiNguoiDung
+              maLoaiNguoiDung: newData.maLoaiNguoiDung,
+              maNhom: "GP01"
             };
             console.log(user);
 
@@ -111,6 +114,7 @@ export default function UserManagement() {
                 userService
                   .UpdateUserAxios(user, userAD.accessToken)
                   .then(result => {
+                    alert("Đã sửa")
                     getData();
                   })
                   .catch(({...error}) => {

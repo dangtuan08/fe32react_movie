@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Link,withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 class NavBar extends Component {
   // componentDidMount
   handleSubmit = e => {
     e.preventDefault();
     localStorage.removeItem("UserAdmin");
-    this.props.history.push("/admin")
+    this.props.history.push("/admin");
   };
   render() {
     let userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
@@ -41,7 +41,11 @@ class NavBar extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a className="navbar-brand" href="#">
-              Quản Trị
+              <img
+                className="img-fluid"
+                src={require("../../../Assets/img/web-logo.png")}
+                alt="web-logo.png"
+              />
             </a>
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
               {/* <li className="nav-item active">
@@ -75,4 +79,4 @@ class NavBar extends Component {
   }
 }
 
-export default withRouter(NavBar)
+export default withRouter(NavBar);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import { userService, movieService } from "../../../Services/index";
+import MovieService from "../../../Services/Movie";
 
 // import { AccessAlarm, ThreeDRotation } from '@material-ui/icon';
 
@@ -24,23 +25,23 @@ export default function MovieManagement() {
       {
         title: "Hình ảnh",
         field: "hinhAnh",
-        // type: "file",
-        // editComponent: props => {
-        //   return (
-        //     // <input type="text" value={props.value} onChange={props.onChange} />
-        //     // <input type="file" onChange={handleOnChange} />
-        //     <input
-        //       type="file"
-        //       onChange={props.onChange}
-        //       value={handleOnChange}
-        //     />
-        //   );
-        // },
+        type: "file",
+        editComponent: props => {
+          return (
+            // <input type="text" value={props.value} onChange={props.onChange} />
+            // <input type="file" onChange={handleOnChange} />
+            <input
+              type="file"
+              onChange={props.onChange}
+              value={handleOnChange}
+            />
+          );
+        },
         render: rowData => <img src={rowData.hinhAnh} style={{ width: 50 }} />
       },
       { title: "Mô tả", field: "moTa" },
       { title: "Mã nhóm", field: "maNhom" },
-      { title: "Ngày khởi chiếu", field: "ngayKhoiChieu", type: "text" },
+      { title: "Ngày khởi chiếu", field: "ngayKhoiChieu", type: "date" },
       { title: "Đánh giá", field: "danhGia", type: "numeric" }
     ],
     data: []
@@ -97,22 +98,23 @@ export default function MovieManagement() {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              console.log(newData);
+              console.log(newData.hinhAnh);
               let userAD = JSON.parse(localStorage.getItem("UserAdmin"));
               let movie = {
-                maPhim: 0,
+                maPhim: "1234",
                 tenPhim: newData.tenPhim,
                 biDanh: newData.biDanh,
                 trailer: newData.trailer,
-                hinhAnh: "",
+                hinhAnh: newData.hinhAnh,
                 moTa: newData.moTa,
                 maNhom: newData.maNhom,
                 ngayKhoiChieu: newData.ngayKhoiChieu,
-                danhGia: 0
+                danhGia: newData.danhGia
               };
               movieService
                 .AddNewMovieAxios(movie, userAD.accessToken)
                 .then(result => {
+                  alert("Them thanh cong");
                   getData();
                 })
                 .catch(err => {
@@ -137,11 +139,23 @@ export default function MovieManagement() {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              setState(prevState => {
-                const data = [...prevState.data];
-                data.splice(data.indexOf(oldData), 1);
-                return { ...prevState, data };
-              });
+              console.log(oldData);
+              let userAD = JSON.parse(localStorage.getItem("UserAdmin"));
+              movieService
+                .DeleteMovieAxios(oldData.maPhim, userAD.accessToken)
+                .then(res => {
+                  getData();
+                  console.log(res.data);
+                  alert(res.data);
+                })
+                .catch(er => {
+                  console.log(er);
+                });
+              // setState(prevState => {
+              //   const data = [...prevState.data];
+              //   data.splice(data.indexOf(oldData), 1);
+              //   return { ...prevState, data };
+              // });
             }, 600);
           })
       }}
