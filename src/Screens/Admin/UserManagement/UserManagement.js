@@ -79,8 +79,9 @@ export default function UserManagement() {
                 .then(result => {
                   getData();
                 })
-                .catch(err => {
-                  console.log(err.response.data);
+                .catch(({...error}) => {
+                  console.log( {...error} )
+
                 });
               // setState(prevState => {
               //   const data = [...prevState.data];

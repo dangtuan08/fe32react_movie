@@ -25,45 +25,27 @@ export default function MovieManagement() {
         title: "Hình ảnh",
         field: "hinhAnh",
         // type: "file",
-        editComponent: props => {
-          return (
-            // <input type="text" value={props.value} onChange={props.onChange} />
-            // <input type="file" onChange={handleOnChange} />
-            <input
-              type="file"
-              onChange={props.onChange}
-              value={handleOnChange}
-            />
-          );
-        },
+        // editComponent: props => {
+        //   return (
+        //     // <input type="text" value={props.value} onChange={props.onChange} />
+        //     // <input type="file" onChange={handleOnChange} />
+        //     <input
+        //       type="file"
+        //       onChange={props.onChange}
+        //       value={handleOnChange}
+        //     />
+        //   );
+        // },
         render: rowData => <img src={rowData.hinhAnh} style={{ width: 50 }} />
       },
       { title: "Mô tả", field: "moTa" },
       { title: "Mã nhóm", field: "maNhom" },
-      { title: "Ngày khởi chiếu", field: "ngayKhoiChieu", type: "datetime" },
+      { title: "Ngày khởi chiếu", field: "ngayKhoiChieu", type: "text" },
       { title: "Đánh giá", field: "danhGia", type: "numeric" }
     ],
-    data: [
-      // { name: "Mehmet", surname: "Baran", birthYear: 1987, birthCity: 63 },
-      // {
-      //   name: "Zerya Betül",
-      //   surname: "Baran",
-      //   birthYear: 2017,
-      //   birthCity: 34
-      // }
-    ]
+    data: []
   });
-
-  function handleOnChange(event) {
-    console.log(event.target.files[0]);
-    return event.target.files[0];
-  }
-  useEffect(() => {
-    // console.log("mounted");
-    // console.log();
-    let user = JSON.parse(localStorage.getItem("UserAdmin"));
-    console.log(user.taiKhoan);
-
+  function getData() {
     movieService
       .getListMovieAxios({})
       .then(result => {
@@ -78,6 +60,19 @@ export default function MovieManagement() {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  function handleOnChange(event) {
+    console.log(event.target.files[0]);
+    return event.target.files[0];
+  }
+  useEffect(() => {
+    // console.log("mounted");
+    // console.log();
+    let user = JSON.parse(localStorage.getItem("UserAdmin"));
+    console.log(user.taiKhoan);
+
+    getData();
   }, []);
 
   return (
@@ -98,24 +93,35 @@ export default function MovieManagement() {
         }
       }}
       editable={{
-        onRowAdd: newData => {
-          console.log(newData);
-
+        onRowAdd: newData =>
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              setState(prevState => {
-                const data = [...prevState.data];
-                data.push(newData);
-                return { ...prevState, data };
-              });
+              console.log(newData);
+              let userAD = JSON.parse(localStorage.getItem("UserAdmin"));
+              let movie = {
+                maPhim: 0,
+                tenPhim: newData.tenPhim,
+                biDanh: newData.biDanh,
+                trailer: newData.trailer,
+                hinhAnh: "",
+                moTa: newData.moTa,
+                maNhom: newData.maNhom,
+                ngayKhoiChieu: newData.ngayKhoiChieu,
+                danhGia: 0
+              };
+              movieService
+                .AddNewMovieAxios(movie, userAD.accessToken)
+                .then(result => {
+                  getData();
+                })
+                .catch(err => {
+                  console.log(err.response.data);
+                });
             }, 600);
-          });
-        },
-
+          }),
         onRowUpdate: (newData, oldData) =>
           new Promise(resolve => {
-            console.log(newData);
             setTimeout(() => {
               resolve();
               if (oldData) {
@@ -127,20 +133,17 @@ export default function MovieManagement() {
               }
             }, 600);
           }),
-        onRowDelete: oldData => {
-          console.log(oldData);
-
-          //   new Promise(resolve => {
-          //     setTimeout(() => {
-          //       resolve();
-          //       setState(prevState => {
-          //         const data = [...prevState.data];
-          //         data.splice(data.indexOf(oldData), 1);
-          //         return { ...prevState, data };
-          //       });
-          //     }, 600);
-          //   })
-        }
+        onRowDelete: oldData =>
+          new Promise(resolve => {
+            setTimeout(() => {
+              resolve();
+              setState(prevState => {
+                const data = [...prevState.data];
+                data.splice(data.indexOf(oldData), 1);
+                return { ...prevState, data };
+              });
+            }, 600);
+          })
       }}
     />
   );
