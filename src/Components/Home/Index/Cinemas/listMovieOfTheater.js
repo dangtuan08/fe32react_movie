@@ -63,7 +63,7 @@ class ListMovieOfTheater extends Component {
           dsPhim
         },
         () => {
-        console.log(this.state.dsPhim);
+        // console.log(this.state.dsPhim);
         
         }
       );

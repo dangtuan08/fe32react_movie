@@ -80,11 +80,11 @@ class Header extends Component {
               <span>{this.props.user.taiKhoan}</span>
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
+              {/* <a className="dropdown-item" href="#">
                 Thông tin tài khoản
-              </a>
+              </a> */}
               <Link className="dropdown-item" to="/chi-tiet-tai-khoan">
-                Đặt vé
+                Vé đã đặt
               </Link>
               <div className="dropdown-divider" />
               <button

@@ -25,7 +25,7 @@ class Theater extends Component {
             dsCumRap: result.data
           },
           () => {
-            console.log(this.state);
+            // console.log(this.state);
           }
         );
       })

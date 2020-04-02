@@ -36,7 +36,7 @@ class MovieTime extends Component {
         gioChieu: mangGioChieu
       },
       () => {
-        console.log(this.state);
+        // console.log(this.state);
       }
     );
   }

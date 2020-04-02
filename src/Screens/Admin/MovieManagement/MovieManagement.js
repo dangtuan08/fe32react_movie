@@ -26,17 +26,24 @@ export default function MovieManagement() {
         title: "Hình ảnh",
         field: "hinhAnh",
         type: "currency",
-        // editComponent: props => {
-        //   return (
-        //     // <input type="text" value={props.value} onChange={props.onChange} />
-        //     // <input type="file" onChange={handleOnChange} />
-        //     <input
-        //       type="file"
-        //       onChange={props.onChange}
-        //       value={handleOnChange}
-        //     />
-        //   );
-        // },
+        editComponent: props => {
+          return (
+            <div>
+              <input
+                type="text"
+                value={props.value}
+                onChange={props.onChange}
+              />
+              <input type="file" onChange={handleOnChange} />
+            </div>
+
+            // <input
+            //   type="file"
+            //   onChange={props.onChange}
+            //   value={handleOnChange}
+            // />
+          );
+        },
         render: rowData => <img src={rowData.hinhAnh} style={{ width: 50 }} />
       },
       { title: "Mô tả", field: "moTa" },
@@ -132,16 +139,43 @@ export default function MovieManagement() {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-
-              let day = new Date(oldData.ngayKhoiChieu).toLocaleDateString();
+              let userAD = JSON.parse(localStorage.getItem("UserAdmin"));
+              let day = new Date(newData.ngayKhoiChieu).toLocaleDateString(
+                "en-GB"
+              );
               console.log(day);
-              if (oldData) {
-                setState(prevState => {
-                  const data = [...prevState.data];
-                  data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };
+              console.log(newData);
+              let movie = {
+                maPhim: newData.maPhim,
+                tenPhim: newData.tenPhim,
+                biDanh: newData.biDanh,
+                trailer: newData.trailer,
+                hinhAnh: newData.hinhAnh,
+                moTa: newData.moTa,
+                maNhom: newData.maNhom,
+                ngayKhoiChieu: day,
+                danhGia: newData.danhGia
+              };
+              console.log(movie);
+
+              movieService
+                .UpdateMovieAxios(movie, userAD.accessToken)
+                .then(result => {
+                  console.log(result);
+
+                  alert("Sửa thành công");
+                  getData();
+                })
+                .catch(err => {
+                  console.log(err);
                 });
-              }
+              // if (oldData) {
+              //   setState(prevState => {
+              //     const data = [...prevState.data];
+              //     data[data.indexOf(oldData)] = newData;
+              //     return { ...prevState, data };
+              //   });
+              // }
             }, 600);
           }),
         onRowDelete: oldData =>

@@ -25,7 +25,7 @@ class Movie extends Component {
       
       return (
         <>
-          <div className="col-sm-3 py-4">
+          <div className="col-6 col-sm-6 col-md-4 col-lg-3 py-4">
             <div className="item movie-item">
               <div className="card">
                 <div className="movie-img">
