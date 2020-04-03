@@ -46,6 +46,14 @@ class MovieService {
       headers: { Authorization: "Bearer " + accessToken }
     });
   };
+  UpLoadImgAxios = (file,accessToken) => {
+    return Axios({
+      method: "POST",
+      url: `http://movie0706.cybersoft.edu.vn/api/QuanLyPhim/UploadHinhAnhPhim`,
+      data: file,
+      // headers: { Authorization: "Bearer " + accessToken }
+    });
+  };
 }
 
 export default MovieService;

@@ -32,11 +32,15 @@ export default function MovieManagement() {
               <input
                 type="text"
                 value={props.value}
-                onChange={props.onChange}
+                onChange={e => props.onChange(e.target.value)}
               />
               <input type="file" onChange={handleOnChange} />
             </div>
-
+            // <input
+            //     type="text"
+            //     value={props.value}
+            //     onChange={e => props.onChange(e.target.value)}
+            //   />
             // <input
             //   type="file"
             //   onChange={props.onChange}
@@ -53,6 +57,7 @@ export default function MovieManagement() {
     ],
     data: []
   });
+  let [file, setFile] = useState(null);
   function getData() {
     movieService
       .getListMovieAxios({})
@@ -71,8 +76,19 @@ export default function MovieManagement() {
   }
 
   function handleOnChange(event) {
-    console.log(event.target.files[0]);
-    return event.target.files[0];
+    // console.log(event.target.files[0]);
+    setFile((file = event.target.files[0]));
+    console.log(file);
+
+    // return event.target.files[0];
+  }
+
+  function upLoadImg(tenPhim) {
+    let frm = new FormData();
+    frm.append("File", file, file.name);
+    frm.append("tenphim", tenPhim);
+    frm.append("manhom", "GP01");
+    return frm;
   }
   useEffect(() => {
     // console.log("mounted");
@@ -157,25 +173,43 @@ export default function MovieManagement() {
                 danhGia: newData.danhGia
               };
               console.log(movie);
-
-              movieService
-                .UpdateMovieAxios(movie, userAD.accessToken)
-                .then(result => {
-                  console.log(result);
-
-                  alert("Sửa thành công");
-                  getData();
-                })
-                .catch(err => {
-                  console.log(err);
-                });
-              // if (oldData) {
-              //   setState(prevState => {
-              //     const data = [...prevState.data];
-              //     data[data.indexOf(oldData)] = newData;
-              //     return { ...prevState, data };
-              //   });
-              // }
+              if (file === null) {
+                movieService
+                  .UpdateMovieAxios(movie, userAD.accessToken)
+                  .then(result => {
+                    console.log(result);
+                    alert("Sửa thành công");
+                    getData();
+                  })
+                  .catch(err => {
+                    console.log(err);
+                  });
+              } else {
+                movieService
+                  .UpdateMovieAxios(movie, userAD.accessToken)
+                  .then(result => {
+                    console.log(result);
+                    // alert("Sửa thành công");
+                    // getData();
+                    let fileImg= upLoadImg(newData.tenPhim)
+                    movieService
+                      .UpLoadImgAxios(fileImg)
+                      .then(result => {
+                        
+                        setFile((file = null));
+                        console.log(result,file);
+                        alert("Sửa thành công");
+                        getData();
+                      })
+                      .catch(({...error}) => {
+                        getData();
+                        console.log( {...error} )
+                      });
+                  })
+                  .catch(err => {
+                    console.log(err);
+                  });
+              }
             }, 600);
           }),
         onRowDelete: oldData =>
@@ -191,8 +225,8 @@ export default function MovieManagement() {
                   console.log(res.data);
                   alert(res.data);
                 })
-                .catch(er => {
-                  console.log(er);
+                .catch(({...error}) => {
+                  console.log( {...error} )
                 });
               // setState(prevState => {
               //   const data = [...prevState.data];
