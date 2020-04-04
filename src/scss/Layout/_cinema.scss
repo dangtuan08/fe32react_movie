@@ -13,6 +13,33 @@
       margin-bottom: 0;
       // padding-right: 10px;
     }
+    // @include respond-to("extra-large") {
+    //   .seat{
+    //     font-size: 13px;
+    //   }
+    // }
+
+    @include respond-to("large") {
+      .nav-item{
+        width: 12%;
+        margin-bottom: 0;
+        // padding-right: 10px;
+      }
+    }
+    @include respond-to("medium") {
+      .nav-item{
+        width: 12%;
+        margin-bottom: 0;
+        // padding-right: 10px;
+      }
+    }
+    @include respond-to("small") {
+      .nav-item{
+        width: 12%;
+        margin-bottom: 0;
+        // padding-right: 10px;
+      }
+    }
     .nav-link {
       padding: 0.3em;
       
@@ -46,6 +73,7 @@
     .cinema-logo {
       width: 60px;
     }
+    
     .cinema-info {
       padding-left: 0;
       overflow: hidden;

@@ -19,20 +19,19 @@ export default function MovieManagement() {
           maxWidth: 50,
           overflow: "hidden",
           whiteSpace: "nowrap",
-          textOverflow: "ellipsis"
-        }
+          textOverflow: "ellipsis",
+        },
       },
       {
         title: "Hình ảnh",
         field: "hinhAnh",
-        type: "currency",
-        editComponent: props => {
+        editComponent: (props) => {
           return (
             <div>
               <input
                 type="text"
                 value={props.value}
-                onChange={e => props.onChange(e.target.value)}
+                onChange={(e) => props.onChange(e.target.value)}
               />
               <input type="file" onChange={handleOnChange} />
             </div>
@@ -48,29 +47,41 @@ export default function MovieManagement() {
             // />
           );
         },
-        render: rowData => <img src={rowData.hinhAnh} style={{ width: 50 }} />
+        render: (rowData) => (
+          <img src={rowData.hinhAnh} style={{ width: 50 }} />
+        ),
       },
-      { title: "Mô tả", field: "moTa" },
+      {
+        title: "Mô tả",
+        field: "moTa",
+        cellStyle: {
+          width: 50,
+          maxWidth: 50,
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
+        },
+      },
       { title: "Mã nhóm", field: "maNhom" },
       { title: "Ngày khởi chiếu", field: "ngayKhoiChieu", type: "date" },
-      { title: "Đánh giá", field: "danhGia", type: "numeric" }
+      { title: "Đánh giá", field: "danhGia", type: "numeric" },
     ],
-    data: []
+    data: [],
   });
   let [file, setFile] = useState(null);
   function getData() {
     movieService
       .getListMovieAxios({})
-      .then(result => {
+      .then((result) => {
         console.log(result.data);
 
-        setState(prevState => {
+        setState((prevState) => {
           const data = result.data;
           return { ...prevState, data };
           // console.log(data);
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -109,16 +120,16 @@ export default function MovieManagement() {
         actionsColumnIndex: -1,
         addRowPosition: "first",
         rowStyle: {
-          backgroundColor: "#EEE"
+          backgroundColor: "#EEE",
         },
         headerStyle: {
           backgroundColor: "#01579b",
-          color: "#FFF"
-        }
+          color: "#FFF",
+        },
       }}
       editable={{
-        onRowAdd: newData =>
-          new Promise(resolve => {
+        onRowAdd: (newData) =>
+          new Promise((resolve) => {
             setTimeout(() => {
               resolve();
               console.log(newData.ngayKhoiChieu);
@@ -133,26 +144,51 @@ export default function MovieManagement() {
                 tenPhim: newData.tenPhim,
                 biDanh: newData.biDanh,
                 trailer: newData.trailer,
-                hinhAnh: newData.hinhAnh,
+                hinhAnh:
+                  newData.hinhAnh === ""
+                    ? newData.hinhAnh + ".jpg"
+                    : "hinhAnh.jpg",
                 moTa: newData.moTa,
                 maNhom: newData.maNhom,
                 ngayKhoiChieu: day,
-                danhGia: newData.danhGia
+                danhGia: newData.danhGia,
               };
-
-              movieService
-                .AddNewMovieAxios(movie, userAD.accessToken)
-                .then(result => {
-                  alert("Them thanh cong");
-                  getData();
-                })
-                .catch(err => {
-                  console.log(err.response.data);
-                });
+              if (file === null) {
+                movieService
+                  .AddNewMovieAxios(movie, userAD.accessToken)
+                  .then((result) => {
+                    alert("Them thanh cong");
+                    getData();
+                  })
+                  .catch((err) => {
+                    console.log(err.response.data);
+                  });
+              } else {
+                movieService
+                  .AddNewMovieAxios(movie, userAD.accessToken)
+                  .then((result) => {
+                    let fileImg = upLoadImg(newData.tenPhim);
+                    movieService
+                      .UpLoadImgAxios(fileImg)
+                      .then((result) => {
+                        setFile((file = null));
+                        console.log(result, file);
+                        alert("Thêm thành công");
+                        getData();
+                      })
+                      .catch(({ ...error }) => {
+                        getData();
+                        console.log({ ...error });
+                      });
+                  })
+                  .catch((err) => {
+                    console.log(err.response.data);
+                  });
+              }
             }, 600);
           }),
         onRowUpdate: (newData, oldData) =>
-          new Promise(resolve => {
+          new Promise((resolve) => {
             setTimeout(() => {
               resolve();
               let userAD = JSON.parse(localStorage.getItem("UserAdmin"));
@@ -170,63 +206,63 @@ export default function MovieManagement() {
                 moTa: newData.moTa,
                 maNhom: newData.maNhom,
                 ngayKhoiChieu: day,
-                danhGia: newData.danhGia
+                danhGia: newData.danhGia,
               };
               console.log(movie);
               if (file === null) {
                 movieService
                   .UpdateMovieAxios(movie, userAD.accessToken)
-                  .then(result => {
+                  .then((result) => {
                     console.log(result);
                     alert("Sửa thành công");
                     getData();
                   })
-                  .catch(err => {
+                  .catch((err) => {
                     console.log(err);
                   });
               } else {
                 movieService
                   .UpdateMovieAxios(movie, userAD.accessToken)
-                  .then(result => {
+                  .then((result) => {
                     console.log(result);
                     // alert("Sửa thành công");
                     // getData();
-                    let fileImg= upLoadImg(newData.tenPhim)
+                    let fileImg = upLoadImg(newData.tenPhim);
                     movieService
                       .UpLoadImgAxios(fileImg)
-                      .then(result => {
-                        
+                      .then((result) => {
                         setFile((file = null));
-                        console.log(result,file);
+                        console.log(result, file);
                         alert("Sửa thành công");
                         getData();
                       })
-                      .catch(({...error}) => {
+                      .catch(({ ...error }) => {
                         getData();
-                        console.log( {...error} )
+                        console.log({ ...error });
                       });
                   })
-                  .catch(err => {
+                  .catch((err) => {
                     console.log(err);
                   });
               }
             }, 600);
           }),
-        onRowDelete: oldData =>
-          new Promise(resolve => {
+        onRowDelete: (oldData) =>
+          new Promise((resolve) => {
             setTimeout(() => {
               resolve();
               console.log(oldData);
               let userAD = JSON.parse(localStorage.getItem("UserAdmin"));
               movieService
                 .DeleteMovieAxios(oldData.maPhim, userAD.accessToken)
-                .then(res => {
+                .then((res) => {
                   getData();
                   console.log(res.data);
                   alert(res.data);
                 })
-                .catch(({...error}) => {
-                  console.log( {...error} )
+                .catch(({ ...error }) => {
+                  console.log({ ...error });
+                  // alert({ ...error }.response.data);
                 });
               // setState(prevState => {
               //   const data = [...prevState.data];
@@ -234,7 +270,7 @@ export default function MovieManagement() {
               //   return { ...prevState, data };
               // });
             }, 600);
-          })
+          }),
       }}
     />
   );

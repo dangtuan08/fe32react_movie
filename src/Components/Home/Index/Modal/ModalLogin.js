@@ -5,7 +5,7 @@ import * as action from "../../../../Store/Actions/User";
 
 class ModalLogin extends Component {
   render() {
-    console.log("render modal login");
+    // console.log("render modal login");
     
     return (
       <div id="modalLogin" className="modal fade modalLogin">

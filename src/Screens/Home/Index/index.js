@@ -8,6 +8,7 @@ import * as actionCinema from "../../../Store/Actions/Cinema";
 import { connect } from "react-redux";
 
 import Cinemas from "../../../Components/Home/Index/Cinemas/cinemas";
+import News from "../../../Components/Home/Index/News/news";
 
 class Index extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class Index extends Component {
         <HomeTool />
         <ListMovie />
         <Cinemas />
+        <News/>
       </>
     );
   }
