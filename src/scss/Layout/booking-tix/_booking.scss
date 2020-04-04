@@ -15,6 +15,7 @@
       height: 25px;
       cursor: pointer;
       border-radius: 5px;
+      line-height: 25px;
       font-size: 13px;
       // vertical-align: middle;
     }
@@ -27,14 +28,37 @@
     .seat-click {
       background-color: #44c020;
     }
-    .d-contents{
+    .d-contents {
       display: flex;
       justify-content: flex-start;
-      .seat-info{
+      .seat-info {
         width: 30px;
       }
     }
-    
+
+    @include respond-to("extra-large") {
+      .seat{
+        font-size: 13px;
+      }
+    }
+
+    @include respond-to("large") {
+      .seat{
+        font-size: 11px;
+      }
+    }
+    @include respond-to("medium") {
+      .seat{
+        font-size: 10px;
+      }
+    }
+    @include respond-to("small") {
+      .seat{
+        font-size: 9px;
+        height: 20px;
+        line-height: 20px;
+      }
+    }
   }
 
   .booking-info {

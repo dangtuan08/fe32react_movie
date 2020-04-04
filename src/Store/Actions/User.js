@@ -59,6 +59,7 @@ export const actLoginAdmin = (user, history) => {
         }
       })
       .catch(err => {
+        alert(err.response.data)
         console.log(err.response.data);
       });
   };
